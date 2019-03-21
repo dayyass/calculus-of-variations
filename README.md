@@ -1,1 +1,1 @@
-# CalculusOfVariations
+Calculus of variation project.
