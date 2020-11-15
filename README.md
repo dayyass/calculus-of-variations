@@ -1,5 +1,5 @@
 ### About
-My bachelor project on solving the *Calculus of variations* problems using symbolic differentiation and integration.
+My bachelor project on solving the *Calculus of variations* problems using symbolic mathematics.
 
 ### What is *Calculus of variations*
 According to Wikipedia:
