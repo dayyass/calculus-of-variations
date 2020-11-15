@@ -1,5 +1,5 @@
 ### About
-My bachelor project on solving the *Calculus of variations* problems.
+My bachelor project on solving the *Calculus of variations* problems using symbolic differentiation and integration.
 
 ### What is *Calculus of variations*
 According to Wikipedia:
@@ -28,3 +28,19 @@ This is the task of findinig an extrema in continuously differentiable functions
 <img src="https://render.githubusercontent.com/render/math?math=\dot x(t) = \frac {dx}{dt})"> - function derivative,
 
 <img src="https://render.githubusercontent.com/render/math?math=x_0, x_1 \in \mathbb{R}"> - boundary conditions.
+
+#### Example
+<img src="https://render.githubusercontent.com/render/math?math=I(x) = \int_{0}^{1} (\dot x^2 %2B tx) dt \to extr">
+<img src="https://render.githubusercontent.com/render/math?math=x(0) = 0">
+<img src="https://render.githubusercontent.com/render/math?math=x(1) = 0">
+
+### Euler–Lagrange equation
+Functions that maximize or minimize functionals may be found using the [Euler–Lagrange equation](https://en.wikipedia.org/wiki/Euler–Lagrange_equation) of the calculus of variations:
+
+<img src="https://render.githubusercontent.com/render/math?math=L_x(t, x(t), \dot x(t)) - \frac {d}{dt}L_{\dot x}(t, x(t), \dot x(t)) = 0">, where
+
+<img src="https://render.githubusercontent.com/render/math?math=L_x"> - partial derivative of <img src="https://render.githubusercontent.com/render/math?math=L"> w.r.t. <img src="https://render.githubusercontent.com/render/math?math=x">,
+
+<img src="https://render.githubusercontent.com/render/math?math=L_{\dot x}"> - partial derivative of <img src="https://render.githubusercontent.com/render/math?math=L"> w.r.t. <img src="https://render.githubusercontent.com/render/math?math=\dot x">.
+
+Arbitrary constants arising when solving this differential equation, find from the given boundary conditions.
