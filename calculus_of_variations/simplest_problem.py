@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
-from abstract_problem import AbstractSolver
 from sympy import var, Function, diff, integrate, dsolve, solve
+from calculus_of_variations.abstract_problem import AbstractSolver
 
 
 t = var('t')
@@ -19,6 +19,7 @@ class SimplestProblemSolver(AbstractSolver):
 
     def __init__(self, L: str, t0: float, t1: float, x0: float, x1: float):
         self._L_str = L
+
         self.L = eval(L)
         self.t0 = t0
         self.t1 = t1
@@ -26,7 +27,7 @@ class SimplestProblemSolver(AbstractSolver):
         self.x1 = x1
 
     def __str__(self):
-        task = f'integral from {self.t0} to {self.t1} of {self._L_str} -> extr'
+        task = f'integral from {self.t0} to {self.t1} of ({self._L_str})dt -> extr'
         condition_1 = f'x({self.t0}) = {self.x0}'
         condition_2 = f'x({self.t1}) = {self.x1}'
         return f'{task}\n{condition_1}\n{condition_2}\n'
@@ -49,28 +50,16 @@ class SimplestProblemSolver(AbstractSolver):
         self.coefficients = coefficients
 
     def _particular_solution(self):
-        particular_solution = self.general_solution.subs(self.coefficients)
-        self.particular_solution = particular_solution
+        super()._particular_solution()
 
     def _extrema_value(self):
-        extreme_value = integrate(self.L.subs([(x_diff, diff(self.particular_solution, t)),
-                                               (x, self.particular_solution)]),
-                                  (t, self.t0, self.t1))
+        L_subs = self.L.subs([(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)])
+        extreme_value = integrate(L_subs, (t, self.t0, self.t1))
 
         self.extreme_value = extreme_value
 
     def solve(self, verbose: bool = True):
-        self._general_solution()
-        self._coefficients()
-        self._particular_solution()
-        self._extrema_value()
-
-        if verbose:
-            print(self)
-            print(f'general_solution: {self.general_solution}')
-            print(f'coefficients: {self.coefficients}')
-            print(f'particular_solution: {self.particular_solution}')
-            print(f'extreme_value: {self.extreme_value}')
+        super().solve(verbose=verbose)
 
 
 if __name__ == '__main__':

@@ -1,14 +1,12 @@
 import unittest
 from parameterized import parameterized_class
 
-from sympy import var
 from sympy.functions import exp, log
-from simplest_problem import SimplestProblemSolver
+from calculus_of_variations.simplest_problem import SimplestProblemSolver, t
 
 
-t = var('t')
-C1 = var('C1')
-C2 = var('C2')
+C1 = SimplestProblemSolver.C1
+C2 = SimplestProblemSolver.C2
 
 
 def make_solution(L: str, t0: float, t1: float, x0: float, x1: float):
@@ -58,14 +56,14 @@ test_case_5 = {
 class TestSimplestProblemSolver(unittest.TestCase):
 
     def test_general_solution(self):
-        self.assertEqual(self.solution.general_solution, self.general_solution)
+        self.assertAlmostEqual(self.solution.general_solution, self.general_solution)
 
     def test_coefficients(self):
         for coef in self.coefficients.keys():
             self.assertAlmostEqual(self.solution.coefficients[coef], self.coefficients[coef])
 
     def test_particular_solution(self):
-        self.assertEqual(self.solution.particular_solution, self.particular_solution)
+        self.assertAlmostEqual(self.solution.particular_solution, self.particular_solution)
 
     def test_extreme_value(self):
         self.assertAlmostEqual(self.solution.extreme_value, self.extreme_value)
