@@ -47,3 +47,28 @@ Functions that maximize or minimize functionals may be found using the [Euler–
 <img src="https://render.githubusercontent.com/render/math?math=L_{\dot x}"> - partial derivative of <img src="https://render.githubusercontent.com/render/math?math=L"> w.r.t. <img src="https://render.githubusercontent.com/render/math?math=\dot x">.
 
 Arbitrary constants arising when solving this differential equation, find from the given boundary conditions.
+
+### List of supported problems
+- [x] [Simplest problem](https://github.com/dayyass/calculus_of_variations/wiki/Simplest-problem)
+- [x] [Boltz problem](https://github.com/dayyass/calculus_of_variations/wiki/Boltz-problem)
+- [x] [Isoperimetric problem](https://github.com/dayyass/calculus_of_variations/wiki/Isoperimetric-problem)
+- [x] [Higher derivatives problem](https://github.com/dayyass/calculus_of_variations/wiki/Higher-derivatives-problem)
+- [x] [Multidimensional problem](https://github.com/dayyass/calculus_of_variations/wiki/Multidimensional-problem)
+
+### Usage
+```
+# Simplest problem
+python calculus_of_variations/simplest_problem.py -L {str} -t0 {float} -t1 {float} -x0 {float} -x1 {float}
+
+# Boltz problem
+python calculus_of_variations/boltz_problem.py -L {str} -l {str} -t0 {float} -t1 {float}
+
+# Isoperimetric problem
+python calculus_of_variations/isoperimetric_problem.py -f0 {str} -t0 {float} -t1 {float} -x0 {float} -x1 {float} -f_list {str_1} {str_2} ... -alpha_list {float_1} {float_2} ...
+
+# Higher derivatives problem
+python calculus_of_variations/higher_derivatives_problem.py -n {int} -L {str} -t0 {float} -t1 {float} -x0 {float} -x1 {float} -x0_array {float_1} {float_2} ... -x1_array {float_1} {float_2} ...
+
+# Multidimensional problem
+python calculus_of_variations/multidimensional_problem.py -L {str} -t0 {float} -t1 {float} -x1_0 {float} -x1_1 {float} -x2_0 {float} -x2_1 {float}
+```
