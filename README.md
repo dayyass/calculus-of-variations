@@ -72,3 +72,5 @@ python calculus_of_variations/higher_derivatives_problem.py -n {int} -L {str} -t
 # Multidimensional problem
 python calculus_of_variations/multidimensional_problem.py -L {str} -t0 {float} -t1 {float} -x1_0 {float} -x1_1 {float} -x2_0 {float} -x2_1 {float}
 ```
+
+For specific examples see [main.py](https://github.com/dayyass/calculus_of_variations/blob/master/main.sh).
