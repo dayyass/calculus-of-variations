@@ -1,6 +1,10 @@
+import sys
 from argparse import ArgumentParser
 from sympy import var, Function, diff, integrate, dsolve, solve
-from .abstract_problem import AbstractSolver
+
+# TODO: fix it
+sys.path.append('./')
+from calculus_of_variations.abstract_problem import AbstractSolver
 
 
 # maximum 2 dimensions
@@ -35,11 +39,11 @@ class MultidimensionalSolver(AbstractSolver):
 
     def __str__(self):
         task = f'integral from {self.t0} to {self.t1} of ({self._L_str})dt -> extr\n'
-        condition_x1_0 = f'x1({self.t0}) = {self.x1_0}'
-        condition_x1_1 = f'x1({self.t1}) = {self.x1_1}'
-        condition_x2_0 = f'x2({self.t0}) = {self.x2_0}'
-        condition_x2_1 = f'x2({self.t1}) = {self.x2_1}'
-        return f'{task}\n{condition_x1_0}\n{condition_x1_1}\n{condition_x2_0}\n{condition_x2_1}\n'
+        condition_x1_0 = f'x1({self.t0}) = {self.x1_0}\n'
+        condition_x1_1 = f'x1({self.t1}) = {self.x1_1}\n'
+        condition_x2_0 = f'x2({self.t0}) = {self.x2_0}\n'
+        condition_x2_1 = f'x2({self.t1}) = {self.x2_1}\n'
+        return f'{task}{condition_x1_0}{condition_x1_1}{condition_x2_0}{condition_x2_1}'
 
     def __repr__(self):
         return self.__str__()

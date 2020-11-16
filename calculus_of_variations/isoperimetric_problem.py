@@ -1,10 +1,16 @@
+import sys
+from typing import List
 from argparse import ArgumentParser
 from sympy import var, Function, diff, integrate, dsolve, solve
-from .abstract_problem import AbstractSolver
-from typing import List
 
-# to convert string to expression with eval()
-from sympy.functions import *
+# for inference (f_list)
+from sympy import cos, sin, log, exp
+
+# TODO: fix it
+sys.path.append('./')
+from calculus_of_variations.abstract_problem import AbstractSolver
+
+
 
 
 t = var('t')
@@ -38,13 +44,13 @@ class IsoperimetricProblemSolver(AbstractSolver):
 
     def __str__(self):
         task = f'integral from {self.t0} to {self.t1} of ({self._f0_str})dt -> extr\n'
-        condition_1 = f'x({self.t0}) = {self.x0}'
-        condition_2 = f'x({self.t1}) = {self.x1}'
+        condition_1 = f'x({self.t0}) = {self.x0}\n'
+        condition_2 = f'x({self.t1}) = {self.x1}\n'
         integral_conditions = ''
         for f, alpha in zip(self.f_list, self.alpha_list):
             integral_conditions += f'integral from {self.t0} to {self.t1} of ({f})dt = {alpha}\n'
 
-        return f'{task}\n{integral_conditions}\n{condition_1}\n{condition_2}\n'
+        return f'{task}{integral_conditions}{condition_1}{condition_2}'
 
     def __repr__(self):
         return self.__str__()

@@ -1,6 +1,10 @@
+import sys
 from argparse import ArgumentParser
 from sympy import var, Function, diff, integrate, dsolve, solve
-from .abstract_problem import AbstractSolver
+
+# TODO: fix it
+sys.path.append('./')
+from calculus_of_variations.abstract_problem import AbstractSolver
 
 
 t = var('t')
@@ -33,7 +37,7 @@ class BoltzSolver(AbstractSolver):
 
     def __str__(self):
         task = f'integral from {self.t0} to {self.t1} of ({self._L_str})dt + {self._l_str} -> extr\n'
-        return f'{task}\n'
+        return f'{task}'
 
     def __repr__(self):
         return self.__str__()

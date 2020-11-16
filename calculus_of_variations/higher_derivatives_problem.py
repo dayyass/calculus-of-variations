@@ -1,7 +1,11 @@
+import sys
+from typing import List
 from argparse import ArgumentParser
 from sympy import var, Function, diff, integrate, dsolve, solve
-from .abstract_problem import AbstractSolver
-from typing import List
+
+# TODO: fix it
+sys.path.append('./')
+from calculus_of_variations.abstract_problem import AbstractSolver
 
 
 t = var('t')
@@ -46,7 +50,7 @@ class HigherDerivativesSolver(AbstractSolver):
                 condition_x0 += f'x_diff_{i}({self.t0}) = {self.x0_array[i-1]}\n'
                 condition_x1 += f'x_diff_{i}({self.t1}) = {self.x1_array[i-1]}\n'
 
-        return f'{task}\n{condition_x0}\n{condition_x1}\n'
+        return f'{task}{condition_x0}{condition_x1}'
 
     def __repr__(self):
         return self.__str__()

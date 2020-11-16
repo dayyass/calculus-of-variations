@@ -1,11 +1,10 @@
+import sys
 from argparse import ArgumentParser
 from sympy import var, Function, diff, integrate, dsolve, solve
-from .abstract_problem import AbstractSolver
 
-# TODO: check it
-# to convert string to expression with eval()
-from sympy import pi
-from sympy.functions import exp, log, sin, cos, sqrt
+# TODO: fix it
+sys.path.append('./')
+from calculus_of_variations.abstract_problem import AbstractSolver
 
 
 t = var('t')
@@ -33,9 +32,9 @@ class SimplestProblemSolver(AbstractSolver):
 
     def __str__(self):
         task = f'integral from {self.t0} to {self.t1} of ({self._L_str})dt -> extr\n'
-        condition_1 = f'x({self.t0}) = {self.x0}'
-        condition_2 = f'x({self.t1}) = {self.x1}'
-        return f'{task}\n{condition_1}\n{condition_2}\n'
+        condition_1 = f'x({self.t0}) = {self.x0}\n'
+        condition_2 = f'x({self.t1}) = {self.x1}\n'
+        return f'{task}{condition_1}{condition_2}'
 
     def __repr__(self):
         return self.__str__()
