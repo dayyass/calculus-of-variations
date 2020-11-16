@@ -1,6 +1,9 @@
 ### About
 My bachelor project on solving the *Calculus of variations* problems using symbolic mathematics.
 
+I [participated](https://it-mm.rea.ru/uploads/arhiv/2019/sertificat/299.pdf) with this project at the IX International Scientific and Practical Conference named after A.I. Kitov "Information Technologies and Mathematical Methods in Economics and Management".
+More about conference [here](https://it-mm.rea.ru/eng).
+
 ### What is *Calculus of variations*
 According to Wikipedia:
 
