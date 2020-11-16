@@ -1,6 +1,10 @@
 from argparse import ArgumentParser
 from sympy import var, Function, diff, integrate, dsolve, solve
-from calculus_of_variations.abstract_problem import AbstractSolver
+from .abstract_problem import AbstractSolver
+
+# TODO: check it
+# to convert string to expression with eval()
+from sympy.functions import *
 
 
 t = var('t')
@@ -39,7 +43,7 @@ class SimplestProblemSolver(AbstractSolver):
         self.L_x_diff = diff(self.L, x_diff)
         self.L_x = diff(self.L, x)
 
-        general_solution = dsolve(self.L_x - diff(self.L_x_diff, t), x).rhs
+        general_solution = dsolve(self.L_x - diff(self.L_x_diff, t), x).rhs.expand()
         self.general_solution = general_solution
 
     def _coefficients(self):

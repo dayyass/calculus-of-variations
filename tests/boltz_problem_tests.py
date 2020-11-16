@@ -2,7 +2,7 @@ import unittest
 from parameterized import parameterized_class
 
 from sympy.functions import exp, log
-from calculus_of_variations.boltz_problem import BoltzSolver, t, x, x_diff, x_t0, x_t1
+from calculus_of_variations.boltz_problem import BoltzSolver, t
 
 
 C1 = BoltzSolver.C1
