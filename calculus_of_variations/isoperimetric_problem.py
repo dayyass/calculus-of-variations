@@ -92,9 +92,9 @@ class IsoperimetricProblemSolver(AbstractSolver):
 
     def _extrema_value(self):
         f0_subs = self.f0.subs([(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)])
-        extreme_value = integrate(f0_subs, (t, self.t0, self.t1))
+        extrema_value = integrate(f0_subs, (t, self.t0, self.t1))
 
-        self.extreme_value = extreme_value
+        self.extrema_value = extrema_value
 
     def solve(self, verbose: bool = True):
         self.__make_lambdas()

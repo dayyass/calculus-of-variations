@@ -69,9 +69,9 @@ class BoltzSolver(AbstractSolver):
             (x_t0, self.particular_solution.subs(t, self.t0)),
             (x_t1, self.particular_solution.subs(t, self.t1)),
         ])
-        extreme_value = integrate(L_subs, (t, self.t0, self.t1)) + l_subs
+        extrema_value = integrate(L_subs, (t, self.t0, self.t1)) + l_subs
 
-        self.extreme_value = extreme_value
+        self.extrema_value = extrema_value
 
     def solve(self, verbose: bool = True):
         super().solve(verbose=verbose)

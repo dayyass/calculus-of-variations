@@ -8,6 +8,7 @@ t = var('t')
 x = Function('x')(t)
 x_diff = diff(x, t)
 
+# maximum 4 order derivatives
 x_diff_2 = diff(x, t, 2)
 x_diff_3 = diff(x, t, 3)
 x_diff_4 = diff(x, t, 4)
@@ -25,6 +26,7 @@ class HigherDerivativesSolver(AbstractSolver):
     ):
         self._L_str = L
 
+        self.n = n
         self.L = eval(L)
         self.t0 = t0
         self.t1 = t1
@@ -32,7 +34,6 @@ class HigherDerivativesSolver(AbstractSolver):
         self.x1 = x1
         self.x0_array = x0_array
         self.x1_array = x1_array
-        self.n = n
 
     def __str__(self):
         task = f'integral from {self.t0} to {self.t1} of ({self._L_str})dt -> extr\n'
@@ -65,8 +66,7 @@ class HigherDerivativesSolver(AbstractSolver):
     def __make_substitutions(self):
         self.substitutions = [(x, self.particular_solution)]
         for i in range(1, self.n + 1):
-            self.substitutions.append((diff(x, t, i),
-                                       diff(self.particular_solution, t, i)))
+            self.substitutions.append((diff(x, t, i), diff(self.particular_solution, t, i)))
         self.substitutions = list(reversed(self.substitutions))
 
     def _general_solution(self):
@@ -75,7 +75,7 @@ class HigherDerivativesSolver(AbstractSolver):
         for i in range(1, self.n + 1):
             self.de += (-1) ** i * diff(diff(self.L, diff(x, t, i)), t, i)
 
-        general_solution = dsolve(self.de, x).rhs
+        general_solution = dsolve(self.de, x).rhs.expand()
         self.general_solution = general_solution
 
     def _coefficients(self):
@@ -94,8 +94,8 @@ class HigherDerivativesSolver(AbstractSolver):
     def _extrema_value(self):
         self.__make_substitutions()
 
-        extreme_value = integrate(self.L.subs(self.substitutions), (t, self.t0, self.t1))
-        self.extreme_value = extreme_value
+        extrema_value = integrate(self.L.subs(self.substitutions), (t, self.t0, self.t1))
+        self.extrema_value = extrema_value
 
     def solve(self, verbose: bool = True):
         super().solve(verbose=verbose)

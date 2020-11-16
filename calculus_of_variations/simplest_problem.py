@@ -4,7 +4,8 @@ from .abstract_problem import AbstractSolver
 
 # TODO: check it
 # to convert string to expression with eval()
-from sympy.functions import *
+from sympy import pi
+from sympy.functions import exp, log, sin, cos, sqrt
 
 
 t = var('t')
@@ -58,9 +59,9 @@ class SimplestProblemSolver(AbstractSolver):
 
     def _extrema_value(self):
         L_subs = self.L.subs([(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)])
-        extreme_value = integrate(L_subs, (t, self.t0, self.t1))
+        extrema_value = integrate(L_subs, (t, self.t0, self.t1))
 
-        self.extreme_value = extreme_value
+        self.extrema_value = extrema_value
 
     def solve(self, verbose: bool = True):
         super().solve(verbose=verbose)

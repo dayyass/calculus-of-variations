@@ -34,7 +34,7 @@ class AbstractSolver(ABC):
         """
         Find extrema value for particular solution.
         """
-        self.extreme_value = None
+        self.extrema_value = None
 
     @abstractmethod
     def solve(self, verbose: bool = True):
@@ -51,5 +51,5 @@ class AbstractSolver(ABC):
             print(f'general_solution: {self.general_solution}')
             print(f'coefficients: {self.coefficients}')
             print(f'particular_solution: {self.particular_solution}')
-            print(f'extreme_value: {self.extreme_value}')
+            print(f'extrema_value: {self.extrema_value}')
             print()
