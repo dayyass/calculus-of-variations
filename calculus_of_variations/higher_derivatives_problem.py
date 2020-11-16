@@ -92,7 +92,6 @@ class HigherDerivativesSolver(AbstractSolver):
         super()._particular_solution()
 
     def _extrema_value(self):
-
         self.__make_substitutions()
 
         extreme_value = integrate(self.L.subs(self.substitutions), (t, self.t0, self.t1))

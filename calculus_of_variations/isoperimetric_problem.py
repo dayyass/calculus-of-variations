@@ -25,6 +25,9 @@ class IsoperimetricProblemSolver(AbstractSolver):
     def __init__(
             self, f0: str, t0: float, t1: float, x0: float, x1: float, f_list: List[str], alpha_list: List[float],
     ):
+        self._f0_str = f0
+        self._f_str_list = f_list
+
         self.f0 = eval(f0)
         self.t0 = t0
         self.t1 = t1
@@ -32,6 +35,19 @@ class IsoperimetricProblemSolver(AbstractSolver):
         self.x1 = x1
         self.f_list = [eval(f) for f in f_list]
         self.alpha_list = alpha_list
+
+    def __str__(self):
+        task = f'integral from {self.t0} to {self.t1} of ({self._f0_str})dt -> extr\n'
+        condition_1 = f'x({self.t0}) = {self.x0}'
+        condition_2 = f'x({self.t1}) = {self.x1}'
+        integral_conditions = ''
+        for f, alpha in zip(self.f_list, self.alpha_list):
+            integral_conditions += f'integral from {self.t0} to {self.t1} of ({f})dt = {alpha}\n'
+
+        return f'{task}\n{integral_conditions}\n{condition_1}\n{condition_2}\n'
+
+    def __repr__(self):
+        return self.__str__()
 
     def __make_lambdas(self):
         self.lambdas = []

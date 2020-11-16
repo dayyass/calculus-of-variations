@@ -52,3 +52,4 @@ class AbstractSolver(ABC):
             print(f'coefficients: {self.coefficients}')
             print(f'particular_solution: {self.particular_solution}')
             print(f'extreme_value: {self.extreme_value}')
+            print()

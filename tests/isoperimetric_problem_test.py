@@ -16,7 +16,7 @@ lambda_2 = var('lambda_2')
 
 def make_solution(f0: str, t0: float, t1: float, x0: float, x1: float, f_list: List[str], alpha_list: List[float]):
     solution = IsoperimetricProblemSolver(f0, t0, t1, x0, x1, f_list, alpha_list)
-    solution.solve(verbose=False)
+    solution.solve(verbose=True)
     return solution
 
 
