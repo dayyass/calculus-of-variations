@@ -58,7 +58,7 @@ test_case_5 = {
 
 
 @parameterized_class([test_case_1, test_case_2, test_case_3, test_case_4, test_case_5])
-class TestSimplestProblemSolver(unittest.TestCase):
+class TestSolver(unittest.TestCase):
 
     def test_general_solution(self):
         self.assertAlmostEqual(self.solution.general_solution, self.general_solution)

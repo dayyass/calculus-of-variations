@@ -32,7 +32,7 @@ class BoltzSolver(AbstractSolver):
         self.t1 = t1
 
     def __str__(self):
-        task = f'integral from {self.t0} to {self.t1} of ({self._L_str})dt + {self._l_str} -> extr'
+        task = f'integral from {self.t0} to {self.t1} of ({self._L_str})dt + {self._l_str} -> extr\n'
         return f'{task}\n'
 
     def __repr__(self):

@@ -50,7 +50,7 @@ test_case_4 = {
 
 
 @parameterized_class([test_case_1, test_case_2, test_case_3, test_case_4])
-class TestBoltzSolver(unittest.TestCase):
+class TestSolver(unittest.TestCase):
 
     def test_general_solution(self):
         self.assertAlmostEqual(self.solution.general_solution, self.general_solution)
