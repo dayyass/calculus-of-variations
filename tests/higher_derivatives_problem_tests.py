@@ -55,8 +55,6 @@ test_case_4 = {
 class TestSolver(unittest.TestCase):
 
     def test_general_solution(self):
-        print('-', self.solution.general_solution)
-        print('+', self.general_solution)
         self.assertAlmostEqual(self.solution.general_solution, self.general_solution)
 
     def test_coefficients(self):
