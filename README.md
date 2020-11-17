@@ -50,6 +50,8 @@ Arbitrary constants arising when solving this differential equation, find from t
 - [x] [Higher derivatives problem](https://github.com/dayyass/calculus_of_variations/wiki/Higher-derivatives-problem)
 - [x] [Multidimensional problem](https://github.com/dayyass/calculus_of_variations/wiki/Multidimensional-problem)
 
+More about each task in [project wiki](https://github.com/dayyass/calculus_of_variations/wiki).
+
 ### Usage
 ```
 # Simplest problem
