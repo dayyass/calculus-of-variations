@@ -19,6 +19,19 @@ class MultidimensionalSolver(AbstractSolver):
 
     """
     Solver for simplest problem with two dimensions in calculus of variation.
+
+    Attributes:
+        L: Integrand.
+        t0: Lower limit of the integral.
+        t1: Upper limit of the integral.
+        x1_0: Boundary condition of x1 in t0.
+        x1_1: Boundary condition of x1 in t1.
+        x2_0: Boundary condition of x2 in t0.
+        x2_1: boundary condition of x2 in t1.
+
+    To use:
+        solution = MultidimensionalSolver(L='x1_diff**2 + x2_diff**2', t0=0, t1=1, x1_0=0, x1_1=1, x2_0=0, x2_1=1)
+        solution.solve(verbose=True)
     """
 
     C1 = var('C1')
@@ -49,12 +62,18 @@ class MultidimensionalSolver(AbstractSolver):
         return self.__str__()
 
     def __make_substitutions(self):
+        """
+        Substitutions for finding extrema_value
+        """
         self.substitutions = [
             (x1_diff, diff(self.particular_solution_1, t)), (x2_diff, diff(self.particular_solution_2, t)),
             (x1, self.particular_solution_1), (x2, self.particular_solution_2),
         ]
 
     def _general_solution(self):
+        """
+        Find general solution.
+        """
         self.L_x1 = diff(self.L, x1)
         self.L_x2 = diff(self.L, x2)
         self.L_x1_diff = diff(self.L, x1_diff)
@@ -90,6 +109,9 @@ class MultidimensionalSolver(AbstractSolver):
         self.general_solution_2 = general_solution_2
 
     def _coefficients(self):
+        """
+        Find particular solution coefficients.
+        """
         self.first_eq = self.general_solution_1.subs(t, self.t0) - self.x1_0
         self.second_eq = self.general_solution_1.subs(t, self.t1) - self.x1_1
         self.third_eq = self.general_solution_2.subs(t, self.t0) - self.x2_0
@@ -102,16 +124,25 @@ class MultidimensionalSolver(AbstractSolver):
         self.coefficients = coefficients
 
     def _particular_solution(self):
+        """
+        Substitute particular solution coefficients to general solution.
+        """
         self.particular_solution_1 = self.general_solution_1.subs(self.coefficients)
         self.particular_solution_2 = self.general_solution_2.subs(self.coefficients)
 
     def _extrema_value(self):
+        """
+        Find extrema value for particular solution.
+        """
         self.__make_substitutions()
 
         extrema_value = integrate(self.L.subs(self.substitutions), (t, self.t0, self.t1))
         self.extrema_value = extrema_value
 
     def solve(self, verbose: bool = True):
+        """
+        Solve task using all encapsulated methods.
+        """
         super().solve(verbose=False)
 
         if verbose:
@@ -127,13 +158,13 @@ class MultidimensionalSolver(AbstractSolver):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('-L', type=str, required=True)
-    parser.add_argument('-t0', type=float, required=True)
-    parser.add_argument('-t1', type=float, required=True)
-    parser.add_argument('-x1_0', type=float, required=True)
-    parser.add_argument('-x1_1', type=float, required=True)
-    parser.add_argument('-x2_0', type=float, required=True)
-    parser.add_argument('-x2_1', type=float, required=True)
+    parser.add_argument('-L', type=str, required=True, help='integrand')
+    parser.add_argument('-t0', type=float, required=True, help='lower limit of the integral')
+    parser.add_argument('-t1', type=float, required=True, help='upper limit of the integral')
+    parser.add_argument('-x1_0', type=float, required=True, help='boundary condition of x1 in t0')
+    parser.add_argument('-x1_1', type=float, required=True, help='boundary condition of x1 in t1')
+    parser.add_argument('-x2_0', type=float, required=True, help='boundary condition of x2 in t0')
+    parser.add_argument('-x2_1', type=float, required=True, help='boundary condition of x2 in t1')
     args = parser.parse_args()
 
     MultidimensionalSolver(

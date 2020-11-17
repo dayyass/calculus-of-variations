@@ -21,6 +21,16 @@ class BoltzSolver(AbstractSolver):
 
     """
     Solver for Boltz problem in calculus of variation.
+
+    Attributes:
+        L: Integrand.
+        l: Terminant.
+        t0: Lower limit of the integral.
+        t1: Upper limit of the integral.
+
+    To use:
+        solution = BoltzSolver(L='x_diff ** 2 + 2 * x', l='x_t0 ** 2', t0=0, t1=1)
+        solution.solve(verbose=True)
     """
 
     C1 = var('C1')
@@ -43,6 +53,9 @@ class BoltzSolver(AbstractSolver):
         return self.__str__()
 
     def _general_solution(self):
+        """
+        Find general solution.
+        """
         self.L_x_diff = diff(self.L, x_diff)
         self.L_x = diff(self.L, x)
 
@@ -50,6 +63,9 @@ class BoltzSolver(AbstractSolver):
         self.general_solution = general_solution
 
     def _coefficients(self):
+        """
+        Find particular solution coefficients.
+        """
         self.first_eq = self.L_x_diff.subs([
             (x_diff, diff(self.general_solution, t)),
             (x, self.general_solution), (t, self.t0),
@@ -65,9 +81,15 @@ class BoltzSolver(AbstractSolver):
         self.coefficients = coefficients
 
     def _particular_solution(self):
+        """
+        Substitute particular solution coefficients to general solution.
+        """
         super()._particular_solution()
 
     def _extrema_value(self):
+        """
+        Find extrema value for particular solution.
+        """
         L_subs = self.L.subs([(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)])
         l_subs = self.l.subs([
             (x_t0, self.particular_solution.subs(t, self.t0)),
@@ -78,15 +100,18 @@ class BoltzSolver(AbstractSolver):
         self.extrema_value = extrema_value
 
     def solve(self, verbose: bool = True):
+        """
+        Solve task using all encapsulated methods.
+        """
         super().solve(verbose=verbose)
 
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('-L', type=str, required=True)
-    parser.add_argument('-l', type=str, required=True)
-    parser.add_argument('-t0', type=float, required=True)
-    parser.add_argument('-t1', type=float, required=True)
+    parser.add_argument('-L', type=str, required=True, help='integrand')
+    parser.add_argument('-l', type=str, required=True, help='terminant')
+    parser.add_argument('-t0', type=float, required=True, help='lower limit of the integral')
+    parser.add_argument('-t1', type=float, required=True, help='upper limit of the integral')
     args = parser.parse_args()
 
     BoltzSolver(L=args.L, l=args.l, t0=args.t0, t1=args.t1).solve()

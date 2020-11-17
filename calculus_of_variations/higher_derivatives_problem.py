@@ -22,6 +22,20 @@ class HigherDerivativesSolver(AbstractSolver):
 
     """
     Solver for simplest problem with higher derivatives in calculus of variation.
+
+    Attributes:
+        n: Order of differentiation.
+        L: Integrand.
+        t0: Lower limit of the integral.
+        t1: Upper limit of the integral.
+        x0: Boundary condition in t0.
+        x1: Boundary condition in t1.
+        x0_array: Higher order boundary condition in t0 list.
+        x1_array: Higher order boundary condition in t1 list.
+
+    To use:
+        solution = HigherDerivativesSolver(n=2, L='x_diff_2 ** 2', t0=0, t1=1, x0=0, x1=0, x0_array=[0], x1_array=[1])
+        solution.solve(verbose=True)
     """
 
     def __init__(
@@ -56,11 +70,17 @@ class HigherDerivativesSolver(AbstractSolver):
         return self.__str__()
 
     def __make_Cs(self):
+        """
+        Init coefficients for general solution
+        """
         self.Cs = []
         for i in range(1, 2 * self.n + 1):
             self.Cs.append(var('C{}'.format(i)))
 
     def __make_equations(self):
+        """
+        Init the Euler-Poisson equation
+        """
         self.equations = [self.first_eq, self.second_eq]
 
         for i in range(1, self.n):
@@ -68,12 +88,18 @@ class HigherDerivativesSolver(AbstractSolver):
             self.equations.append(diff(self.general_solution, t, i).subs(t, self.t1) - self.x1_array[i - 1])
 
     def __make_substitutions(self):
+        """
+        Substitutions for finding extrema_value
+        """
         self.substitutions = [(x, self.particular_solution)]
         for i in range(1, self.n + 1):
             self.substitutions.append((diff(x, t, i), diff(self.particular_solution, t, i)))
         self.substitutions = list(reversed(self.substitutions))
 
     def _general_solution(self):
+        """
+        Find general solution.
+        """
         self.L_x = diff(self.L, x)
         self.de = self.L_x
         for i in range(1, self.n + 1):
@@ -83,6 +109,9 @@ class HigherDerivativesSolver(AbstractSolver):
         self.general_solution = general_solution
 
     def _coefficients(self):
+        """
+        Find particular solution coefficients.
+        """
         self.first_eq = self.general_solution.subs(t, self.t0) - self.x0
         self.second_eq = self.general_solution.subs(t, self.t1) - self.x1
 
@@ -93,28 +122,41 @@ class HigherDerivativesSolver(AbstractSolver):
         self.coefficients = coefficients
 
     def _particular_solution(self):
+        """
+        Substitute particular solution coefficients to general solution.
+        """
         super()._particular_solution()
 
     def _extrema_value(self):
+        """
+        Find extrema value for particular solution.
+        """
         self.__make_substitutions()
 
         extrema_value = integrate(self.L.subs(self.substitutions), (t, self.t0, self.t1))
         self.extrema_value = extrema_value
 
     def solve(self, verbose: bool = True):
+        """
+        Solve task using all encapsulated methods.
+        """
         super().solve(verbose=verbose)
 
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('-n', type=int, required=True)
-    parser.add_argument('-L', type=str, required=True)
-    parser.add_argument('-t0', type=float, required=True)
-    parser.add_argument('-t1', type=float, required=True)
-    parser.add_argument('-x0', type=float, required=True)
-    parser.add_argument('-x1', type=float, required=True)
-    parser.add_argument('-x0_array', type=float, nargs='+', required=True)
-    parser.add_argument('-x1_array', type=float, nargs='+', required=True)
+    parser.add_argument('-n', type=int, required=True, help='order of differentiation')
+    parser.add_argument('-L', type=str, required=True, help='integrand')
+    parser.add_argument('-t0', type=float, required=True, help='lower limit of the integral')
+    parser.add_argument('-t1', type=float, required=True, help='upper limit of the integral')
+    parser.add_argument('-x0', type=float, required=True, help='boundary condition in t0')
+    parser.add_argument('-x1', type=float, required=True, help='boundary condition in t1')
+    parser.add_argument(
+        '-x0_array', type=float, nargs='+', required=True, help='higher order boundary condition in t0 list',
+    )
+    parser.add_argument(
+        '-x1_array', type=float, nargs='+', required=True, help='higher order boundary condition in t1 list',
+    )
     args = parser.parse_args()
 
     HigherDerivativesSolver(

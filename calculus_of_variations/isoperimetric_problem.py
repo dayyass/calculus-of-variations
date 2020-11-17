@@ -11,8 +11,6 @@ sys.path.append('./')
 from calculus_of_variations.abstract_problem import AbstractSolver
 
 
-
-
 t = var('t')
 x = Function('x')(t)
 x_diff = diff(x, t)
@@ -22,6 +20,19 @@ class IsoperimetricProblemSolver(AbstractSolver):
 
     """
     Solver for isoperimetric problem in calculus of variation.
+
+    Attributes:
+        f0: Integrand.
+        t0: Lower limit of the integral.
+        t1: Upper limit of the integral.
+        x0: Boundary condition in t0.
+        x1: Boundary condition in t1.
+        f_list: Isoperimetric conditions integrand list.
+        alpha_list: Isoperimetric conditions value list.
+
+    To use:
+        solution = IsoperimetricProblemSolver(f0='x_diff ** 2', t0=0, t1=1, x0=0, x1=1, f_list=['x'], alpha_list=[0])
+        solution.solve(verbose=True)
     """
 
     C1 = var('C1')
@@ -56,12 +67,18 @@ class IsoperimetricProblemSolver(AbstractSolver):
         return self.__str__()
 
     def __make_lambdas(self):
+        """
+        Init lambdas for lagrangian function
+        """
         self.lambdas = []
         for i in range(1, len(self.f_list) + 1):
             var(f'lambda_{i}')
             self.lambdas.append(var(f'lambda_{i}'))
 
     def __make_equations_and_params(self):
+        """
+        Init lagrangian function
+        """
         self.equations = [self.first_eq, self.second_eq]
         self.params = [self.C1, self.C2]
 
@@ -74,6 +91,9 @@ class IsoperimetricProblemSolver(AbstractSolver):
             self.params.append(self.lambdas[i] / self.lambda_0)
 
     def _general_solution(self):
+        """
+        Find general solution.
+        """
         self.L = self.lambda_0 * self.f0
         for i in range(len(self.f_list)):
             self.L += self.lambdas[i] * self.f_list[i]
@@ -85,6 +105,9 @@ class IsoperimetricProblemSolver(AbstractSolver):
         self.general_solution = general_solution
 
     def _coefficients(self):
+        """
+        Find particular solution coefficients.
+        """
         self.first_eq = self.general_solution.subs(t, self.t0) - self.x0
         self.second_eq = self.general_solution.subs(t, self.t1) - self.x1
 
@@ -94,28 +117,37 @@ class IsoperimetricProblemSolver(AbstractSolver):
         self.coefficients = coefficients
 
     def _particular_solution(self):
+        """
+        Substitute particular solution coefficients to general solution.
+        """
         super()._particular_solution()
 
     def _extrema_value(self):
+        """
+        Find extrema value for particular solution.
+        """
         f0_subs = self.f0.subs([(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)])
         extrema_value = integrate(f0_subs, (t, self.t0, self.t1))
 
         self.extrema_value = extrema_value
 
     def solve(self, verbose: bool = True):
+        """
+        Solve task using all encapsulated methods.
+        """
         self.__make_lambdas()
         super().solve(verbose=verbose)
 
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument('-f0', type=str, required=True)
-    parser.add_argument('-t0', type=float, required=True)
-    parser.add_argument('-t1', type=float, required=True)
-    parser.add_argument('-x0', type=float, required=True)
-    parser.add_argument('-x1', type=float, required=True)
-    parser.add_argument('-f_list', type=str, nargs='+', required=True)
-    parser.add_argument('-alpha_list', type=float, nargs='+', required=True)
+    parser.add_argument('-f0', type=str, required=True, help='integrand')
+    parser.add_argument('-t0', type=float, required=True, help='lower limit of the integral')
+    parser.add_argument('-t1', type=float, required=True, help='upper limit of the integral')
+    parser.add_argument('-x0', type=float, required=True, help='boundary condition in t0')
+    parser.add_argument('-x1', type=float, required=True, help='boundary condition in t1')
+    parser.add_argument('-f_list', type=str, nargs='+', required=True, help='isoperimetric conditions integrand list')
+    parser.add_argument('-alpha_list', type=float, nargs='+', required=True, help='isoperimetric conditions value list')
     args = parser.parse_args()
 
     IsoperimetricProblemSolver(
