@@ -77,3 +77,22 @@ python calculus_of_variations/multidimensional_problem.py -L {str} -t0 {float} -
 ```
 
 For specific examples see [main.sh](https://github.com/dayyass/calculus_of_variations/blob/master/main.sh).
+
+### Web-interface
+The project supports simple web-interface on localhost:8060 for solving problems:
+```
+# Simplest problem
+python dash/simplest_problem_dash.py
+
+# Boltz problem
+python dash/boltz_problem_dash.py
+
+# Isoperimetric problem
+python dash/isoperimetric_problem_dash.py
+
+# Higher derivatives problem
+python dash/higher_derivatives_problem_dash.py
+
+# Multidimensional problem
+python dash/multidimensional_problem_dash.py
+```
