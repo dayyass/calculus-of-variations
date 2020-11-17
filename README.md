@@ -53,6 +53,12 @@ Arbitrary constants arising when solving this differential equation, find from t
 More about each task in [project wiki](https://github.com/dayyass/calculus_of_variations/wiki).
 
 ### Usage
+Usage for example above:
+```
+python calculus_of_variations/simplest_problem.py -L 'x_diff ** 2' -t0 0 -t1 1 -x0 0 -x1 0
+```
+
+General cases:
 ```
 # Simplest problem
 python calculus_of_variations/simplest_problem.py -L {str} -t0 {float} -t1 {float} -x0 {float} -x1 {float}
