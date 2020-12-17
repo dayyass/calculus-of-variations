@@ -1,0 +1,42 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v3.3.0
+  hooks:
+    - id: no-commit-to-branch
+      args: ['--branch', 'master']
+- repo: https://github.com/pre-commit/mirrors-isort
+  rev: v5.6.4
+  hooks:
+    - id: isort
+      args: ["--profile", "black"]
+- repo: https://github.com/psf/black
+  rev: 20.8b1
+  hooks:
+    - id: black
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.3.0
+  hooks:
+    - id: check-yaml
+    - id: name-tests-test
+      args: ['--django']
+    - id: debug-statements
+    - id: trailing-whitespace
+    - id: check-docstring-first
+    - id: requirements-txt-fixer
+    - id: flake8
+      args: ["--ignore", "E501,W503,E722,E402,E741"]
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v0.790
+  hooks:
+    - id: mypy
+- repo: local
+  hooks:
+    - id: unittest
+      name: unittest
+      entry: python -m unittest discover
+      language: system
+      description: Run all unittests.
+      always_run: true
+      types: [python]
+      pass_filenames: false
+      stages: [commit]
