@@ -1,14 +1,14 @@
 import sys
 from argparse import ArgumentParser
-from sympy import var, Function, diff, integrate, dsolve, solve
+
+from sympy import Function, diff, dsolve, integrate, solve, var
 
 # TODO: fix it
-sys.path.append('./')
+sys.path.append("./")
 from calculus_of_variations.abstract_problem import AbstractSolver
 
-
-t = var('t')
-x = Function('x')(t)
+t = var("t")
+x = Function("x")(t)
 x_diff = diff(x, t)
 
 
@@ -29,8 +29,8 @@ class SimplestProblemSolver(AbstractSolver):
         solution.solve(verbose=True)
     """
 
-    C1 = var('C1')
-    C2 = var('C2')
+    C1 = var("C1")
+    C2 = var("C2")
 
     def __init__(self, L: str, t0: float, t1: float, x0: float, x1: float):
         """
@@ -50,10 +50,10 @@ class SimplestProblemSolver(AbstractSolver):
         self.x1 = x1
 
     def __str__(self):
-        task = f'integral from {self.t0} to {self.t1} of ({self._L_str})dt -> extr\n'
-        condition_1 = f'x({self.t0}) = {self.x0}\n'
-        condition_2 = f'x({self.t1}) = {self.x1}\n'
-        return f'{task}{condition_1}{condition_2}'
+        task = f"integral from {self.t0} to {self.t1} of ({self._L_str})dt -> extr\n"
+        condition_1 = f"x({self.t0}) = {self.x0}\n"
+        condition_2 = f"x({self.t1}) = {self.x1}\n"
+        return f"{task}{condition_1}{condition_2}"
 
     def __repr__(self):
         return self.__str__()
@@ -88,7 +88,9 @@ class SimplestProblemSolver(AbstractSolver):
         """
         Find extrema value for particular solution.
         """
-        L_subs = self.L.subs([(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)])
+        L_subs = self.L.subs(
+            [(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)]
+        )
         extrema_value = integrate(L_subs, (t, self.t0, self.t1))
 
         self.extrema_value = extrema_value
@@ -100,13 +102,23 @@ class SimplestProblemSolver(AbstractSolver):
         super().solve(verbose=verbose)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument('-L', type=str, required=True, help='integrand')
-    parser.add_argument('-t0', type=float, required=True, help='lower limit of the integral')
-    parser.add_argument('-t1', type=float, required=True, help='upper limit of the integral')
-    parser.add_argument('-x0', type=float, required=True, help='boundary condition in t0')
-    parser.add_argument('-x1', type=float, required=True, help='boundary condition in t1')
+    parser.add_argument("-L", type=str, required=True, help="integrand")
+    parser.add_argument(
+        "-t0", type=float, required=True, help="lower limit of the integral"
+    )
+    parser.add_argument(
+        "-t1", type=float, required=True, help="upper limit of the integral"
+    )
+    parser.add_argument(
+        "-x0", type=float, required=True, help="boundary condition in t0"
+    )
+    parser.add_argument(
+        "-x1", type=float, required=True, help="boundary condition in t1"
+    )
     args = parser.parse_args()
 
-    SimplestProblemSolver(L=args.L, t0=args.t0, x0=args.x0, t1=args.t1, x1=args.x1).solve()
+    SimplestProblemSolver(
+        L=args.L, t0=args.t0, x0=args.x0, t1=args.t1, x1=args.x1
+    ).solve()

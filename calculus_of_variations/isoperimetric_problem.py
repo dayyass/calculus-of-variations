@@ -1,18 +1,27 @@
 import sys
-from typing import List
 from argparse import ArgumentParser
-from sympy import var, Function, diff, integrate, dsolve, solve
+from typing import List
 
 # for inference (f_list)
-from sympy import cos, sin, log, exp
+from sympy import (  # noqa
+    Function,
+    cos,
+    diff,
+    dsolve,
+    exp,
+    integrate,
+    log,
+    sin,
+    solve,
+    var,
+)
 
 # TODO: fix it
-sys.path.append('./')
+sys.path.append("./")
 from calculus_of_variations.abstract_problem import AbstractSolver
 
-
-t = var('t')
-x = Function('x')(t)
+t = var("t")
+x = Function("x")(t)
 x_diff = diff(x, t)
 
 
@@ -35,12 +44,19 @@ class IsoperimetricProblemSolver(AbstractSolver):
         solution.solve(verbose=True)
     """
 
-    C1 = var('C1')
-    C2 = var('C2')
-    lambda_0 = var('lambda_0')
+    C1 = var("C1")
+    C2 = var("C2")
+    lambda_0 = var("lambda_0")
 
     def __init__(
-            self, f0: str, t0: float, t1: float, x0: float, x1: float, f_list: List[str], alpha_list: List[float],
+        self,
+        f0: str,
+        t0: float,
+        t1: float,
+        x0: float,
+        x1: float,
+        f_list: List[str],
+        alpha_list: List[float],
     ):
         self._f0_str = f0
         self._f_str_list = f_list
@@ -54,14 +70,16 @@ class IsoperimetricProblemSolver(AbstractSolver):
         self.alpha_list = alpha_list
 
     def __str__(self):
-        task = f'integral from {self.t0} to {self.t1} of ({self._f0_str})dt -> extr\n'
-        condition_1 = f'x({self.t0}) = {self.x0}\n'
-        condition_2 = f'x({self.t1}) = {self.x1}\n'
-        integral_conditions = ''
+        task = f"integral from {self.t0} to {self.t1} of ({self._f0_str})dt -> extr\n"
+        condition_1 = f"x({self.t0}) = {self.x0}\n"
+        condition_2 = f"x({self.t1}) = {self.x1}\n"
+        integral_conditions = ""
         for f, alpha in zip(self.f_list, self.alpha_list):
-            integral_conditions += f'integral from {self.t0} to {self.t1} of ({f})dt = {alpha}\n'
+            integral_conditions += (
+                f"integral from {self.t0} to {self.t1} of ({f})dt = {alpha}\n"
+            )
 
-        return f'{task}{integral_conditions}{condition_1}{condition_2}'
+        return f"{task}{integral_conditions}{condition_1}{condition_2}"
 
     def __repr__(self):
         return self.__str__()
@@ -72,8 +90,8 @@ class IsoperimetricProblemSolver(AbstractSolver):
         """
         self.lambdas = []
         for i in range(1, len(self.f_list) + 1):
-            var(f'lambda_{i}')
-            self.lambdas.append(var(f'lambda_{i}'))
+            var(f"lambda_{i}")
+            self.lambdas.append(var(f"lambda_{i}"))
 
     def __make_equations_and_params(self):
         """
@@ -83,10 +101,13 @@ class IsoperimetricProblemSolver(AbstractSolver):
         self.params = [self.C1, self.C2]
 
         for i in range(len(self.f_list)):
-            equation = integrate(
-                self.f_list[i].subs(x, self.general_solution),
-                (t, self.t0, self.t1),
-            ) - self.alpha_list[i]
+            equation = (
+                integrate(
+                    self.f_list[i].subs(x, self.general_solution),
+                    (t, self.t0, self.t1),
+                )
+                - self.alpha_list[i]
+            )
             self.equations.append(equation)
             self.params.append(self.lambdas[i] / self.lambda_0)
 
@@ -126,7 +147,9 @@ class IsoperimetricProblemSolver(AbstractSolver):
         """
         Find extrema value for particular solution.
         """
-        f0_subs = self.f0.subs([(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)])
+        f0_subs = self.f0.subs(
+            [(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)]
+        )
         extrema_value = integrate(f0_subs, (t, self.t0, self.t1))
 
         self.extrema_value = extrema_value
@@ -139,17 +162,43 @@ class IsoperimetricProblemSolver(AbstractSolver):
         super().solve(verbose=verbose)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument('-f0', type=str, required=True, help='integrand')
-    parser.add_argument('-t0', type=float, required=True, help='lower limit of the integral')
-    parser.add_argument('-t1', type=float, required=True, help='upper limit of the integral')
-    parser.add_argument('-x0', type=float, required=True, help='boundary condition in t0')
-    parser.add_argument('-x1', type=float, required=True, help='boundary condition in t1')
-    parser.add_argument('-f_list', type=str, nargs='+', required=True, help='isoperimetric conditions integrand list')
-    parser.add_argument('-alpha_list', type=float, nargs='+', required=True, help='isoperimetric conditions value list')
+    parser.add_argument("-f0", type=str, required=True, help="integrand")
+    parser.add_argument(
+        "-t0", type=float, required=True, help="lower limit of the integral"
+    )
+    parser.add_argument(
+        "-t1", type=float, required=True, help="upper limit of the integral"
+    )
+    parser.add_argument(
+        "-x0", type=float, required=True, help="boundary condition in t0"
+    )
+    parser.add_argument(
+        "-x1", type=float, required=True, help="boundary condition in t1"
+    )
+    parser.add_argument(
+        "-f_list",
+        type=str,
+        nargs="+",
+        required=True,
+        help="isoperimetric conditions integrand list",
+    )
+    parser.add_argument(
+        "-alpha_list",
+        type=float,
+        nargs="+",
+        required=True,
+        help="isoperimetric conditions value list",
+    )
     args = parser.parse_args()
 
     IsoperimetricProblemSolver(
-        f0=args.f0, t0=args.t0, x0=args.x0, t1=args.t1, x1=args.x1, f_list=args.f_list, alpha_list=args.alpha_list,
+        f0=args.f0,
+        t0=args.t0,
+        x0=args.x0,
+        t1=args.t1,
+        x1=args.x1,
+        f_list=args.f_list,
+        alpha_list=args.alpha_list,
     ).solve()

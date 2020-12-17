@@ -48,8 +48,8 @@ class AbstractSolver(ABC):
 
         if verbose:
             print(self)
-            print(f'general_solution: {self.general_solution}')
-            print(f'coefficients: {self.coefficients}')
-            print(f'particular_solution: {self.particular_solution}')
-            print(f'extrema_value: {self.extrema_value}')
+            print(f"general_solution: {self.general_solution}")
+            print(f"coefficients: {self.coefficients}")
+            print(f"particular_solution: {self.particular_solution}")
+            print(f"extrema_value: {self.extrema_value}")
             print()
