@@ -53,6 +53,16 @@ Arbitrary constants arising when solving this differential equation, find from t
 More about each task in [project wiki](https://github.com/dayyass/calculus_of_variations/wiki).
 
 ### Usage
+First, install dependencies:
+```
+# clone repo   
+git clone https://github.com/dayyass/calculus_of_variations.git
+
+# install dependencies   
+cd calculus_of_variations
+pip install -r requirements.txt
+```
+
 Usage for example above:
 ```
 python calculus_of_variations/simplest_problem.py -L 'x_diff ** 2' -t0 0 -t1 1 -x0 0 -x1 0
