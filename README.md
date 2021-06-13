@@ -106,3 +106,14 @@ python dash/higher_derivatives_problem_dash.py
 # Multidimensional problem
 python dash/multidimensional_problem_dash.py
 ```
+
+### Citation
+If you use muse_as_service in a scientific publication, we would appreciate references to the following BibTex entry:
+```
+@misc{calculus_of_variations,
+    author = {El-Ayyass, Dani},
+    title = {Calculus of Variations problems solving using symbolic mathematics},
+    howpublished = {\url{https://github.com/dayyass/calculus_of_variations}},
+    year = {2018},
+}
+```
