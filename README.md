@@ -110,7 +110,7 @@ python dash/multidimensional_problem_dash.py
 ### Citation
 If you use **calculus_of_variations** in a scientific publication, we would appreciate references to the following BibTex entry:
 ```
-@misc{calculus_of_variations,
+@misc{dayyass_calculus_of_variations,
     author = {El-Ayyass, Dani},
     title = {Calculus of Variations problems solving using symbolic mathematics},
     howpublished = {\url{https://github.com/dayyass/calculus_of_variations}},
