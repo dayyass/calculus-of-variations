@@ -108,7 +108,7 @@ python dash/multidimensional_problem_dash.py
 ```
 
 ### Citation
-If you use muse_as_service in a scientific publication, we would appreciate references to the following BibTex entry:
+If you use **calculus_of_variations** in a scientific publication, we would appreciate references to the following BibTex entry:
 ```
 @misc{calculus_of_variations,
     author = {El-Ayyass, Dani},
