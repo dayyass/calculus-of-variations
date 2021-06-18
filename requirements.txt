@@ -3,6 +3,7 @@ attrs==21.2.0
 Brotli==1.0.9
 cfgv==3.2.0
 click==7.1.2
+coverage==5.5
 dash==1.17.0
 dash-core-components==1.13.0
 dash-html-components==1.1.1

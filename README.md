@@ -119,6 +119,9 @@ To use [**pre-commit**](https://pre-commit.com) hooks run:<br>
 To launch [*tests*](tests) run one of the following commands:<br>
 `pytest` or `python -m unittest discover`
 
+To measure **code coverage** run one of the following commands:<br>
+`coverage run -m pytest && coverage report -m` or `coverage run -m unittest discover && coverage report -m`
+
 ### Citation
 If you use **calculus_of_variations** in a scientific publication, we would appreciate references to the following BibTex entry:
 ```bibtex
