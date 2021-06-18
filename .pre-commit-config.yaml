@@ -29,14 +29,14 @@ repos:
   rev: v0.790
   hooks:
     - id: mypy
-- repo: local
-  hooks:
-    - id: unittest
-      name: unittest
-      entry: python -m unittest discover
-      language: system
-      description: Run all unittests.
-      always_run: true
-      types: [python]
-      pass_filenames: false
-      stages: [commit]
+#- repo: local  # too long
+#  hooks:
+#    - id: unittest
+#      name: unittest
+#      entry: python -m unittest discover
+#      language: system
+#      description: Run all unittests.
+#      always_run: true
+#      types: [python]
+#      pass_filenames: false
+#      stages: [commit]
