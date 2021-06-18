@@ -61,10 +61,10 @@ More about each task in [project wiki](https://github.com/dayyass/calculus_of_va
 ### Usage
 First, install dependencies:
 ```
-# clone repo   
+# clone repo
 git clone https://github.com/dayyass/calculus_of_variations.git
 
-# install dependencies   
+# install dependencies
 cd calculus_of_variations
 pip install -r requirements.txt
 ```
