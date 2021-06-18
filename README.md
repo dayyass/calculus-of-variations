@@ -11,6 +11,8 @@ My bachelor project on solving the *Calculus of variations* problems using symbo
 I [participated](https://it-mm.rea.ru/uploads/arhiv/2019/sertificat/299.pdf) with this project at the IX International Scientific and Practical Conference named after A.I. Kitov "Information Technologies and Mathematical Methods in Economics and Management".<br>
 More about conference [here](https://it-mm.rea.ru/eng).
 
+My [**presentation**](presentation.pdf) about this project.
+
 ### What is *Calculus of variations*
 According to Wikipedia:<br>
 The **calculus of variations** is a field of mathematical analysis that uses variations, which are small changes in functions and functionals, to find maxima and minima of functionals: mappings from a set of functions to the real numbers. Functionals are often expressed as definite integrals involving functions and their derivatives. Functions that maximize or minimize functionals may be found using the Euler–Lagrange equation of the calculus of variations.<br>
@@ -49,13 +51,13 @@ Functions that maximize or minimize functionals may be found using the [Euler–
 Arbitrary constants arising when solving this differential equation, find from the given boundary conditions.
 
 ### List of supported problems
-- [x] [Simplest problem](https://github.com/dayyass/calculus_of_variations/wiki/Simplest-problem)
-- [x] [Boltz problem](https://github.com/dayyass/calculus_of_variations/wiki/Boltz-problem)
-- [x] [Isoperimetric problem](https://github.com/dayyass/calculus_of_variations/wiki/Isoperimetric-problem)
-- [x] [Higher derivatives problem](https://github.com/dayyass/calculus_of_variations/wiki/Higher-derivatives-problem)
-- [x] [Multidimensional problem](https://github.com/dayyass/calculus_of_variations/wiki/Multidimensional-problem)
+- [x] [*Simplest problem*](https://github.com/dayyass/calculus_of_variations/wiki/Simplest-problem)
+- [x] [*Boltz problem*](https://github.com/dayyass/calculus_of_variations/wiki/Boltz-problem)
+- [x] [*Isoperimetric problem*](https://github.com/dayyass/calculus_of_variations/wiki/Isoperimetric-problem)
+- [x] [*Higher derivatives problem*](https://github.com/dayyass/calculus_of_variations/wiki/Higher-derivatives-problem)
+- [x] [*Multidimensional problem*](https://github.com/dayyass/calculus_of_variations/wiki/Multidimensional-problem)
 
-More about each task in [project wiki](https://github.com/dayyass/calculus_of_variations/wiki).
+More about each task in [*project wiki*](https://github.com/dayyass/calculus_of_variations/wiki).
 
 ### Usage
 First, install dependencies:
@@ -92,10 +94,10 @@ python calculus_of_variations/higher_derivatives_problem.py -n {int} -L {str} -t
 python calculus_of_variations/multidimensional_problem.py -L {str} -t0 {float} -t1 {float} -x1_0 {float} -x1_1 {float} -x2_0 {float} -x2_1 {float}
 ```
 
-For specific examples see [main.sh](https://github.com/dayyass/calculus_of_variations/blob/master/main.sh).
+For specific examples see [*main.sh*](main.sh).
 
 ### Web-interface
-The project supports simple web-interface on localhost:8060 for solving problems:
+The project supports simple web-interface on **localhost:8060** for solving problems:
 ```
 # Simplest problem
 python dash/simplest_problem_dash.py
