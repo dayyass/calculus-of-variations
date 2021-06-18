@@ -61,10 +61,11 @@ More about each task in [project wiki](https://github.com/dayyass/calculus_of_va
 ### Usage
 First, install dependencies:
 ```
-# clone repo
+# clone repo (https/ssh)
 git clone https://github.com/dayyass/calculus_of_variations.git
+# git clone git@github.com:dayyass/calculus_of_variations.git
 
-# install dependencies
+# install dependencies (preferable in venv)
 cd calculus_of_variations
 pip install -r requirements.txt
 ```
@@ -112,6 +113,13 @@ python dash/higher_derivatives_problem_dash.py
 # Multidimensional problem
 python dash/multidimensional_problem_dash.py
 ```
+
+### Tests
+To use [**pre-commit**](https://pre-commit.com) hooks run:<br>
+`pre-commit install`
+
+To launch [*tests*](tests) run one of the following commands:<br>
+`pytest` or `python -m unittest discover`
 
 ### Citation
 If you use **calculus_of_variations** in a scientific publication, we would appreciate references to the following BibTex entry:
