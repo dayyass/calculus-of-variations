@@ -1,3 +1,9 @@
+<!-- ![test Status](https://github.com/dayyass/pytorch_ner/workflows/test/badge.svg) -->
+<!-- ![lint Status](https://github.com/dayyass/pytorch_ner/workflows/lint/badge.svg) -->
+![License](https://img.shields.io/github/license/dayyass/calculus_of_variations)
+![release (latest by date)](https://img.shields.io/github/v/release/dayyass/calculus_of_variations)
+[![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 ### About
 My bachelor project on solving the *Calculus of variations* problems using symbolic mathematics (2018).
 
