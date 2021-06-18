@@ -1,5 +1,5 @@
 [![tests status](https://github.com/dayyass/calculus_of_variations/workflows/tests/badge.svg)](.github/workflows/tests.yml)
-[![lint status](https://github.com/dayyass/calculus_of_variations/workflows/lint/badge.svg)](.github/workflows/lint.yml)
+[![linter status](https://github.com/dayyass/calculus_of_variations/workflows/linter/badge.svg)](.github/workflows/linter.yml)
 [![license](https://img.shields.io/github/license/dayyass/calculus_of_variations)](LICENSE)
 [![release (latest by date)](https://img.shields.io/github/v/release/dayyass/calculus_of_variations)](https://github.com/dayyass/calculus_of_variations/releases/latest)
 [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
