@@ -117,7 +117,7 @@ python dash/multidimensional_problem_dash.py
 To use [**pre-commit**](https://pre-commit.com) hooks run:<br>
 `pre-commit install`
 
-To launch [*tests*](tests) run one of the following commands:<br>
+To launch [**tests**](tests) run one of the following commands:<br>
 `pytest` or `python -m unittest discover`
 
 To measure [**code coverage**](https://coverage.readthedocs.io) run one of the following commands:<br>
