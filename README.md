@@ -1,5 +1,6 @@
 [![tests status](https://github.com/dayyass/calculus_of_variations/workflows/tests/badge.svg)](.github/workflows/tests.yml)
-[![lint status](https://github.com/dayyass/calculus_of_variations/workflows/lint/badge.svg)](.github/workflows/lint.yml)
+[![linter status](https://github.com/dayyass/calculus_of_variations/workflows/linter/badge.svg)](.github/workflows/linter.yml)
+[![codecov](https://codecov.io/gh/dayyass/calculus_of_variations/branch/main/graph/badge.svg)](.github/workflows/codecov.yml)
 [![license](https://img.shields.io/github/license/dayyass/calculus_of_variations)](LICENSE)
 [![release (latest by date)](https://img.shields.io/github/v/release/dayyass/calculus_of_variations)](https://github.com/dayyass/calculus_of_variations/releases/latest)
 [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -7,14 +8,12 @@
 ### About
 My bachelor project on solving the *Calculus of variations* problems using symbolic mathematics (2018).
 
-I [participated](https://it-mm.rea.ru/uploads/arhiv/2019/sertificat/299.pdf) with this project at the IX International Scientific and Practical Conference named after A.I. Kitov "Information Technologies and Mathematical Methods in Economics and Management".
+I [participated](https://it-mm.rea.ru/uploads/arhiv/2019/sertificat/299.pdf) with this project at the IX International Scientific and Practical Conference named after A.I. Kitov "Information Technologies and Mathematical Methods in Economics and Management".<br>
 More about conference [here](https://it-mm.rea.ru/eng).
 
 ### What is *Calculus of variations*
-According to Wikipedia:
-
-The **calculus of variations** is a field of mathematical analysis that uses variations, which are small changes in functions and functionals, to find maxima and minima of functionals: mappings from a set of functions to the real numbers. Functionals are often expressed as definite integrals involving functions and their derivatives. Functions that maximize or minimize functionals may be found using the Euler–Lagrange equation of the calculus of variations.
-
+According to Wikipedia:<br>
+The **calculus of variations** is a field of mathematical analysis that uses variations, which are small changes in functions and functionals, to find maxima and minima of functionals: mappings from a set of functions to the real numbers. Functionals are often expressed as definite integrals involving functions and their derivatives. Functions that maximize or minimize functionals may be found using the Euler–Lagrange equation of the calculus of variations.<br>
 More about it [here](https://en.wikipedia.org/wiki/Calculus_of_variations).
 
 ### Simplest problem
@@ -61,10 +60,11 @@ More about each task in [project wiki](https://github.com/dayyass/calculus_of_va
 ### Usage
 First, install dependencies:
 ```
-# clone repo
+# clone repo (https/ssh)
 git clone https://github.com/dayyass/calculus_of_variations.git
+# git clone git@github.com:dayyass/calculus_of_variations.git
 
-# install dependencies
+# install dependencies (preferable in venv)
 cd calculus_of_variations
 pip install -r requirements.txt
 ```
@@ -112,6 +112,16 @@ python dash/higher_derivatives_problem_dash.py
 # Multidimensional problem
 python dash/multidimensional_problem_dash.py
 ```
+
+### Tests
+To use [**pre-commit**](https://pre-commit.com) hooks run:<br>
+`pre-commit install`
+
+To launch [*tests*](tests) run one of the following commands:<br>
+`pytest` or `python -m unittest discover`
+
+To measure **code coverage** run one of the following commands:<br>
+`coverage run -m pytest && coverage report -m` or `coverage run -m unittest discover && coverage report -m`
 
 ### Citation
 If you use **calculus_of_variations** in a scientific publication, we would appreciate references to the following BibTex entry:
