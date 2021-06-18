@@ -8,15 +8,13 @@
 ### About
 My bachelor project on solving the *Calculus of variations* problems using symbolic mathematics (2018).
 
-I [participated](https://it-mm.rea.ru/uploads/arhiv/2019/sertificat/299.pdf) with this project at the IX International Scientific and Practical Conference named after A.I. Kitov "Information Technologies and Mathematical Methods in Economics and Management".<br>
-More about conference [here](https://it-mm.rea.ru/eng).
+I [participated](https://it-mm.rea.ru/uploads/arhiv/2019/sertificat/299.pdf) with this project at the IX International Scientific and Practical Conference named after A.I. Kitov "Information Technologies and Mathematical Methods in Economics and Management" ([link](https://it-mm.rea.ru/eng)).<br>
 
 My [**presentation**](presentation.pdf) about this project.
 
 ### What is *Calculus of variations*
-According to Wikipedia:<br>
+According to Wikipedia ([link](https://en.wikipedia.org/wiki/Calculus_of_variations)):<br>
 The **calculus of variations** is a field of mathematical analysis that uses variations, which are small changes in functions and functionals, to find maxima and minima of functionals: mappings from a set of functions to the real numbers. Functionals are often expressed as definite integrals involving functions and their derivatives. Functions that maximize or minimize functionals may be found using the Euler–Lagrange equation of the calculus of variations.<br>
-More about it [here](https://en.wikipedia.org/wiki/Calculus_of_variations).
 
 ### Simplest problem
 The definition above might seem quite difficult to understend so let's consider the simplest problem:
