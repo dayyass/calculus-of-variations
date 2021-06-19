@@ -2,38 +2,44 @@ import sys
 import unittest
 
 from parameterized import parameterized_class
-from sympy.functions import exp, log
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations.simplest_problem import SimplestProblemSolver, t
+from calculus_of_variations.simplest_problem import SimplestProblemSolver
+from calculus_of_variations.utils import log, sympy_eval, t
 
 C1 = SimplestProblemSolver.C1
 C2 = SimplestProblemSolver.C2
 
 
-def make_solution(L: str, t0: float, t1: float, x0: float, x1: float):
-    solution = SimplestProblemSolver(L, t0, t1, x0, x1)
+def make_solution(L: str, t0: str, t1: str, x0: str, x1: str):
+    solution = SimplestProblemSolver(
+        L=L,
+        t0=sympy_eval(t0),
+        t1=sympy_eval(t1),
+        x0=sympy_eval(x0),
+        x1=sympy_eval(x1),
+    )
     solution.solve(verbose=False)
     return solution
 
 
 test_case_1 = {
-    "solution": make_solution(L="x_diff ** 2", t0=0, t1=1, x0=0, x1=1),
+    "solution": make_solution(L="x_diff ** 2", t0="0", t1="1", x0="0", x1="1"),
     "general_solution": C1 + C2 * t,
     "coefficients": {C1: 0, C2: 1},
     "particular_solution": t,
     "extrema_value": 1,
 }
 test_case_2 = {
-    "solution": make_solution(L="x_diff ** 2 + t * x", t0=0, t1=1, x0=0, x1=0),
+    "solution": make_solution(L="x_diff ** 2 + t * x", t0="0", t1="1", x0="0", x1="0"),
     "general_solution": C1 + C2 * t + t ** 3 / 12,
     "coefficients": {C1: 0, C2: -1 / 12},
     "particular_solution": t ** 3 / 12 - t / 12,
     "extrema_value": -1 / 180,
 }
 test_case_3 = {
-    "solution": make_solution(L="t * x_diff ** 2", t0=1, t1=exp(1), x0=0, x1=1),
+    "solution": make_solution(L="t * x_diff ** 2", t0="1", t1="exp(1)", x0="0", x1="1"),
     "general_solution": C1 + C2 * log(t),
     "coefficients": {C1: 0, C2: 1},
     "particular_solution": log(t),
@@ -41,7 +47,7 @@ test_case_3 = {
 }
 test_case_4 = {
     "solution": make_solution(
-        L="x_diff ** 2 + x_diff * x + 12 * t * x", t0=0, t1=1, x0=0, x1=0
+        L="x_diff ** 2 + x_diff * x + 12 * t * x", t0="0", t1="1", x0="0", x1="0"
     ),
     "general_solution": C1 + C2 * t + t ** 3,
     "coefficients": {C1: 0, C2: -1},
@@ -49,7 +55,9 @@ test_case_4 = {
     "extrema_value": -4 / 5,
 }
 test_case_5 = {
-    "solution": make_solution(L="x_diff ** 2 - t ** 2 * x", t0=0, t1=1, x0=0, x1=0),
+    "solution": make_solution(
+        L="x_diff ** 2 - t ** 2 * x", t0="0", t1="1", x0="0", x1="0"
+    ),
     "general_solution": C1 + C2 * t - t ** 4 / 24,
     "coefficients": {C1: 0, C2: 1 / 24},
     "particular_solution": t / 24 - t ** 4 / 24,
