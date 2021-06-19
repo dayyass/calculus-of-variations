@@ -2,6 +2,30 @@ from typing import Any
 
 from sympy import Function, diff, var
 
+# https://docs.sympy.org/latest/modules/core.html?highlight=pi#module-sympy.core.numbers
+from sympy.core.numbers import E, GoldenRatio, I, pi  # noqa: F401
+
+# https://docs.sympy.org/latest/modules/functions/combinatorial.html#factorial
+from sympy.functions.combinatorial.factorials import (  # noqa: F401
+    factorial,
+    factorial2,
+    subfactorial,
+)
+
+# https://docs.sympy.org/latest/modules/functions/combinatorial.html
+from sympy.functions.combinatorial.numbers import (  # noqa: F401
+    bell,
+    bernoulli,
+    binomial,
+    catalan,
+    euler,
+    fibonacci,
+    stirling,
+)
+
+# https://docs.sympy.org/latest/modules/functions/elementary.html#sympy-functions-elementary-complexes
+from sympy.functions.elementary.complexes import Abs, im, re, sign  # noqa: F401
+
 # https://docs.sympy.org/latest/modules/functions/elementary.html#sympy-functions-elementary-exponential
 from sympy.functions.elementary.exponential import exp, log  # noqa: F401
 
