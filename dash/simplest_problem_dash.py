@@ -3,7 +3,7 @@ import sys
 
 import dash_core_components as dcc
 import dash_html_components as html
-from utils import print_coefficients
+from utils import dash_answer, dash_simplest_problem
 
 import dash
 from dash.dependencies import Input, Output, State
@@ -11,9 +11,6 @@ from dash.dependencies import Input, Output, State
 # TODO: fix it
 sys.path.append("./")
 from calculus_of_variations import SimplestProblemSolver
-
-render_latex_url = r"https://render.githubusercontent.com/render/math?math"
-
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -79,36 +76,10 @@ def update_output(n_clicks, L, t0, t1, x0, x1):
     else:
         to_return = html.Div(
             [
-                html.Div(
-                    [
-                        dcc.Markdown("""### Problem"""),
-                        html.Img(
-                            src=rf"{render_latex_url}=I(x) = \int_{t0}^{t1} \verb|({L})| dt \to extr".replace(
-                                "+", "%2B"
-                            )
-                        ),
-                        html.Br(),
-                        html.Img(src=f"{render_latex_url}=x({t0}) = {x0}"),
-                        html.Br(),
-                        html.Img(src=f"{render_latex_url}=x({t1}) = {x1}"),
-                        html.Br(),
-                    ]
-                ),
-                html.Div(
-                    [
-                        dcc.Markdown("### Answer"),
-                        dcc.Markdown(
-                            f"**General solution**: {solver.general_solution}"
-                        ),
-                        dcc.Markdown(
-                            f"**Coefficients**: {print_coefficients(solver.coefficients)}"
-                        ),
-                        dcc.Markdown(
-                            f"**Particular solution**: {solver.particular_solution}"
-                        ),
-                        dcc.Markdown(f"**Extrema value**: {solver.extrema_value}"),
-                    ]
-                ),
+                dcc.Markdown("""### Problem"""),
+                dash_simplest_problem(solver=solver),
+                dcc.Markdown("### Answer"),
+                dash_answer(solver=solver),
             ]
         )
 
