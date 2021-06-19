@@ -1,8 +1,11 @@
+import sys
 from argparse import ArgumentParser
 
 from sympy import Function, diff, dsolve, integrate, solve, var
 
-from .abstract_problem import AbstractSolver
+# TODO: fix it
+sys.path.append("./")
+from calculus_of_variations.abstract_problem import AbstractSolver
 
 t = var("t")
 x = Function("x")(t)
@@ -117,6 +120,7 @@ if __name__ == "__main__":
         "-x1", type=float, required=True, help="boundary condition in t1"
     )
     args = parser.parse_args()
+    print(args.x1, type(args.x1))
 
     # solve
     SimplestProblemSolver(

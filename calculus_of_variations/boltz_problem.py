@@ -1,8 +1,11 @@
+import sys
 from argparse import ArgumentParser
 
 from sympy import Function, diff, dsolve, integrate, solve, var
 
-from .abstract_problem import AbstractSolver
+# TODO: fix it
+sys.path.append("./")
+from calculus_of_variations.abstract_problem import AbstractSolver
 
 t = var("t")
 x = Function("x")(t)

@@ -1,5 +1,5 @@
-import argparse
 import sys
+from argparse import ArgumentParser
 
 import dash_core_components as dcc
 import dash_html_components as html
@@ -89,7 +89,7 @@ def update_output(n_clicks, L, t0, t1, x0, x1):
 if __name__ == "__main__":
 
     # argparse
-    parser = argparse.ArgumentParser(description="Server configuration")
+    parser = ArgumentParser(description="Server configuration")
     parser.add_argument(
         "--host",
         default="127.0.0.1",
