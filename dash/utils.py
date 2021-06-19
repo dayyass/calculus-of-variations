@@ -24,12 +24,21 @@ def dash_answer(solver):
 
     return html.Div(
         [
-            dcc.Markdown(f"**General solution**: {solver.general_solution}"),
             dcc.Markdown(
-                f"**Coefficients**: {print_coefficients(solver.coefficients)}"
+                r"**General solution**:"
+                + str(solver.general_solution).replace("*", r"\*")
             ),
-            dcc.Markdown(f"**Particular solution**: {solver.particular_solution}"),
-            dcc.Markdown(f"**Extrema value**: {solver.extrema_value}"),
+            dcc.Markdown(
+                r"**Coefficients**:"
+                + str(print_coefficients(solver.coefficients)).replace("*", r"\*")
+            ),
+            dcc.Markdown(
+                r"**Particular solution**:"
+                + str(solver.particular_solution).replace("*", r"\*")
+            ),
+            dcc.Markdown(
+                r"**Extrema value**:" + str(solver.extrema_value).replace("*", r"\*")
+            ),
         ]
     )
 
@@ -76,3 +85,44 @@ def dash_boltz_problem(
             html.Br(),
         ]
     )
+
+
+def dash_isoperimetric_problem(
+    solver,
+    render_latex_url=r"https://render.githubusercontent.com/render/math?math",
+):
+    """
+    Helper function to print isoperimetric problem.
+    """
+
+    problem = [
+        html.Img(
+            src=rf"{render_latex_url}=I_0(x) = \int_{solver.t0}^{solver.t1} \verb|({solver.f0})| dt \to extr".replace(
+                "+", "%2B"
+            )
+        ),
+        html.Br(),
+    ]
+
+    for i in range(len(solver.f_list)):
+        problem.extend(
+            [
+                html.Img(
+                    src=rf"{render_latex_url}=I_{i + 1}(x) = \int_{solver.t0}^{solver.t1} \verb|({solver.f_list[i]})| dt = {solver.alpha_list[i]}".replace(
+                        "+", "%2B"
+                    )
+                ),
+                html.Br(),
+            ]
+        )
+
+    problem.extend(
+        [
+            html.Img(src=f"{render_latex_url}=x({solver.t0}) = {solver.x0}"),
+            html.Br(),
+            html.Img(src=f"{render_latex_url}=x({solver.t1}) = {solver.x1}"),
+            html.Br(),
+        ]
+    )
+
+    return html.Div(problem)

@@ -11,6 +11,7 @@ from sympy import (  # noqa
     exp,
     integrate,
     log,
+    pi,
     sin,
     solve,
     var,
@@ -56,7 +57,7 @@ class IsoperimetricProblemSolver(AbstractSolver):
         x0: float,
         x1: float,
         f_list: List[str],
-        alpha_list: List[float],
+        alpha_list: List[str],
     ):
         self._f0_str = f0
         self._f_str_list = f_list
@@ -66,8 +67,8 @@ class IsoperimetricProblemSolver(AbstractSolver):
         self.t1 = t1
         self.x0 = x0
         self.x1 = x1
-        self.f_list = [eval(f) for f in f_list]
-        self.alpha_list = alpha_list
+        self.f_list = [eval(f.strip()) for f in f_list]
+        self.alpha_list = [eval(alpha.strip()) for alpha in alpha_list]
 
     def __str__(self):
         task = f"integral from {self.t0} to {self.t1} of ({self._f0_str})dt -> extr\n"
@@ -163,6 +164,8 @@ class IsoperimetricProblemSolver(AbstractSolver):
 
 
 if __name__ == "__main__":
+
+    # argparse
     parser = ArgumentParser()
     parser.add_argument("-f0", type=str, required=True, help="integrand")
     parser.add_argument(
@@ -180,25 +183,24 @@ if __name__ == "__main__":
     parser.add_argument(
         "-f_list",
         type=str,
-        nargs="+",
         required=True,
         help="isoperimetric conditions integrand list",
     )
     parser.add_argument(
         "-alpha_list",
-        type=float,
-        nargs="+",
+        type=str,
         required=True,
         help="isoperimetric conditions value list",
     )
     args = parser.parse_args()
 
+    # solve
     IsoperimetricProblemSolver(
         f0=args.f0,
         t0=args.t0,
         x0=args.x0,
         t1=args.t1,
         x1=args.x1,
-        f_list=args.f_list,
-        alpha_list=args.alpha_list,
+        f_list=args.f_list.split(","),
+        alpha_list=args.alpha_list.split(","),
     ).solve()

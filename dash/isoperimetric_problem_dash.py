@@ -3,88 +3,111 @@ import sys
 
 import dash_core_components as dcc
 import dash_html_components as html
+from utils import dash_answer, dash_isoperimetric_problem
 
 import dash
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations.isoperimetric_problem import IsoperimetricProblemSolver
+from calculus_of_variations import IsoperimetricProblemSolver
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(
     [
-        dcc.Markdown("""# Isoperimetric problem dash"""),
-        html.Div([html.Label("Enter f0"), dcc.Input(id="f0")]),
-        html.H4(""),
-        html.Div([html.Label("Enter t0"), dcc.Input(id="t0")]),
-        html.H4(""),
-        html.Div([html.Label("Enter t1"), dcc.Input(id="t1")]),
-        html.H4(""),
-        html.Div([html.Label("Enter x0"), dcc.Input(id="x0")]),
-        html.H4(""),
-        html.Div([html.Label("Enter x1"), dcc.Input(id="x1")]),
-        html.H4(""),
-        html.Div([html.Label("Enter f_list"), dcc.Input(id="f_list")]),
-        html.H4(""),
-        html.Div([html.Label("Enter alpha_list"), dcc.Input(id="alpha_list")]),
-        html.H4(""),
-        html.Div(id="my_input"),
+        dcc.Markdown("""# Isoperimetric problem"""),
+        dcc.Markdown("""### Input"""),
+        html.Div(
+            [
+                dcc.Markdown("Enter **f0**:"),
+                dcc.Input(id="f0", value="x_diff ** 2", type="text"),
+            ]
+        ),
+        html.Br(),
+        html.Div(
+            [dcc.Markdown("Enter **t0**:"), dcc.Input(id="t0", value=0, type="number")]
+        ),
+        html.Br(),
+        html.Div(
+            [dcc.Markdown("Enter **t1**:"), dcc.Input(id="t1", value=1, type="number")]
+        ),
+        html.Br(),
+        html.Div(
+            [dcc.Markdown("Enter **x0**:"), dcc.Input(id="x0", value=0, type="number")]
+        ),
+        html.Br(),
+        html.Div(
+            [dcc.Markdown("Enter **x1**:"), dcc.Input(id="x1", value=1, type="number")]
+        ),
+        html.Br(),
+        html.Div(
+            [
+                dcc.Markdown("Enter **f_list**:"),
+                dcc.Input(id="f_list", value="x", type="text"),
+            ]
+        ),
+        html.Br(),
+        html.Div(
+            [
+                dcc.Markdown("Enter **alpha_list**:"),
+                dcc.Input(id="alpha_list", value="0", type="text"),
+            ]
+        ),
+        html.Br(),
+        html.Button("solve", id="solve"),
+        html.Br(),
+        html.Div(id="input"),
     ]
 )
 
 
 @app.callback(
-    Output("my_input", "children"),
+    Output(component_id="input", component_property="children"),
+    [Input("solve", "n_clicks")],
     [
-        Input("f0", "value"),
-        Input("t0", "value"),
-        Input("t1", "value"),
-        Input("x0", "value"),
-        Input("x1", "value"),
-        Input("f_list", "value"),
-        Input("alpha_list", "value"),
+        State("f0", "value"),
+        State("t0", "value"),
+        State("t1", "value"),
+        State("x0", "value"),
+        State("x1", "value"),
+        State("f_list", "value"),
+        State("alpha_list", "value"),
     ],
 )
-def update_output(f0, t0, t1, x0, x1, f_list, alpha_list):
-    if (
-        (f0 is not None)
-        & (t0 is not None)
-        & (t1 is not None)
-        & (x0 is not None)
-        & (x1 is not None)
-        & (f_list is not None)
-        & (alpha_list is not None)
-    ):
+def update_output(n_clicks, f0, t0, t1, x0, x1, f_list, alpha_list):
 
+    # click "solve"
+    if n_clicks is None:
+        return
+
+    try:
         solver = IsoperimetricProblemSolver(
             f0=f0,
-            t0=float(t0),
-            t1=float(t1),
-            x0=float(x0),
-            x1=float(x1),
-            f_list=f_list.split(),
-            alpha_list=[float(alpha) for alpha in alpha_list.split()],
+            t0=t0,
+            t1=t1,
+            x0=x0,
+            x1=x1,
+            f_list=f_list.split(","),
+            alpha_list=alpha_list.split(","),
         )
-        try:
-            solver.solve()
-        except:
-            to_return = "Something went wrong :("
-        else:
-            to_return = html.Div(
-                [
-                    dcc.Markdown("### ANSWER"),
-                    dcc.Markdown(f"General solution: {solver.general_solution}"),
-                    dcc.Markdown(f"Coefficients: {solver.coefficients}"),
-                    dcc.Markdown(f"Particular solution: {solver.particular_solution}"),
-                    dcc.Markdown(f"Extrema value: {solver.extrema_value}"),
-                ],
-                style={"columnCount": 3},
-            )
+        solver.solve()
 
-        return to_return
+    except:
+        to_return = html.Div(dcc.Markdown("### Something went wrong :("))
+
+    else:
+        to_return = html.Div(
+            [
+                dcc.Markdown("""### Problem"""),
+                dash_isoperimetric_problem(solver=solver),
+                dcc.Markdown("### Answer"),
+                dash_answer(solver=solver),
+            ]
+        )
+
+    return to_return
 
 
 if __name__ == "__main__":
