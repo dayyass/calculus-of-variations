@@ -1,8 +1,40 @@
+from argparse import ArgumentParser
 from typing import Dict
 
 import dash_core_components as dcc
 import dash_html_components as html
 from sympy.core.symbol import Symbol
+
+
+def get_argparse() -> ArgumentParser:
+    """
+    Helper function to get ArgumentParser.
+    """
+
+    parser = ArgumentParser(description="Server configuration")
+    parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        type=str,
+        required=False,
+        help="Host IP used to serve the application",
+    )
+    parser.add_argument(
+        "--port",
+        default=8050,
+        type=int,
+        required=False,
+        help="Port used to serve the application",
+    )
+    parser.add_argument(
+        "--debug",
+        default=False,
+        type=bool,
+        required=False,
+        help="Set Flask debug mode and enable dev tools",
+    )
+
+    return parser
 
 
 def print_coefficients(coefficients: Dict[Symbol, float]) -> str:
@@ -25,19 +57,19 @@ def dash_answer(solver):
     return html.Div(
         [
             dcc.Markdown(
-                r"**General solution**:"
+                r"**General solution**: "
                 + str(solver.general_solution).replace("*", r"\*")
             ),
             dcc.Markdown(
-                r"**Coefficients**:"
+                r"**Coefficients**: "
                 + str(print_coefficients(solver.coefficients)).replace("*", r"\*")
             ),
             dcc.Markdown(
-                r"**Particular solution**:"
+                r"**Particular solution**: "
                 + str(solver.particular_solution).replace("*", r"\*")
             ),
             dcc.Markdown(
-                r"**Extrema value**:" + str(solver.extrema_value).replace("*", r"\*")
+                r"**Extrema value**: " + str(solver.extrema_value).replace("*", r"\*")
             ),
         ]
     )

@@ -1,9 +1,7 @@
 import sys
-from argparse import ArgumentParser
 
 import dash_core_components as dcc
 import dash_html_components as html
-from utils import dash_answer, dash_isoperimetric_problem
 
 import dash
 from dash.dependencies import Input, Output, State
@@ -11,14 +9,15 @@ from dash.dependencies import Input, Output, State
 # TODO: fix it
 sys.path.append("./")
 from calculus_of_variations import IsoperimetricProblemSolver
+from web_interface.utils import dash_answer, dash_isoperimetric_problem, get_argparse
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(
     [
-        dcc.Markdown("""# Isoperimetric problem"""),
-        dcc.Markdown("""### Input"""),
+        dcc.Markdown("# Isoperimetric problem"),
+        dcc.Markdown("### Input"),
         html.Div(
             [
                 dcc.Markdown("Enter **f0**:"),
@@ -27,19 +26,19 @@ app.layout = html.Div(
         ),
         html.Br(),
         html.Div(
-            [dcc.Markdown("Enter **t0**:"), dcc.Input(id="t0", value=0, type="number")]
+            [dcc.Markdown("Enter **t0**:"), dcc.Input(id="t0", value="0", type="text")]
         ),
         html.Br(),
         html.Div(
-            [dcc.Markdown("Enter **t1**:"), dcc.Input(id="t1", value=1, type="number")]
+            [dcc.Markdown("Enter **t1**:"), dcc.Input(id="t1", value="1", type="text")]
         ),
         html.Br(),
         html.Div(
-            [dcc.Markdown("Enter **x0**:"), dcc.Input(id="x0", value=0, type="number")]
+            [dcc.Markdown("Enter **x0**:"), dcc.Input(id="x0", value="0", type="text")]
         ),
         html.Br(),
         html.Div(
-            [dcc.Markdown("Enter **x1**:"), dcc.Input(id="x1", value=1, type="number")]
+            [dcc.Markdown("Enter **x1**:"), dcc.Input(id="x1", value="1", type="text")]
         ),
         html.Br(),
         html.Div(
@@ -89,8 +88,8 @@ def update_output(n_clicks, f0, t0, t1, x0, x1, f_list, alpha_list):
             t1=t1,
             x0=x0,
             x1=x1,
-            f_list=f_list.split(","),
-            alpha_list=alpha_list.split(","),
+            f_list=f_list,
+            alpha_list=alpha_list,
         )
         solver.solve()
 
@@ -100,7 +99,7 @@ def update_output(n_clicks, f0, t0, t1, x0, x1, f_list, alpha_list):
     else:
         to_return = html.Div(
             [
-                dcc.Markdown("""### Problem"""),
+                dcc.Markdown("### Problem"),
                 dash_isoperimetric_problem(solver=solver),
                 dcc.Markdown("### Answer"),
                 dash_answer(solver=solver),
@@ -113,28 +112,7 @@ def update_output(n_clicks, f0, t0, t1, x0, x1, f_list, alpha_list):
 if __name__ == "__main__":
 
     # argparse
-    parser = ArgumentParser(description="Server configuration")
-    parser.add_argument(
-        "--host",
-        default="127.0.0.1",
-        type=str,
-        required=False,
-        help="Host IP used to serve the application",
-    )
-    parser.add_argument(
-        "--port",
-        default=8050,
-        type=int,
-        required=False,
-        help="Port used to serve the application",
-    )
-    parser.add_argument(
-        "--debug",
-        default=False,
-        type=bool,
-        required=False,
-        help="Set Flask debug mode and enable dev tools",
-    )
+    parser = get_argparse()
     args = parser.parse_args()
 
     # run server
