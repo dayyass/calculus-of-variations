@@ -79,6 +79,12 @@ x_diff_3 = diff(x, t, 3)
 x_diff_4 = diff(x, t, 4)
 x_diff_5 = diff(x, t, 5)
 
+# multidimensional
+x1 = Function("x1")(t)
+x1_diff = diff(x1, t)
+x2 = Function("x2")(t)
+x2_diff = diff(x2, t)
+
 
 # TODO: ast eval
 def sympy_eval(string) -> Any:

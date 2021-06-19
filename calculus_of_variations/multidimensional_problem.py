@@ -1,18 +1,12 @@
 import sys
 from argparse import ArgumentParser
 
-from sympy import Function, diff, dsolve, integrate, solve, var
+from sympy import diff, dsolve, integrate, solve, var
 
 # TODO: fix it
 sys.path.append("./")
 from calculus_of_variations.abstract_problem import AbstractSolver
-
-# maximum 2 dimensions
-t = var("t")
-x1 = Function("x1")(t)
-x1_diff = diff(x1, t)
-x2 = Function("x2")(t)
-x2_diff = diff(x2, t)
+from calculus_of_variations.utils import sympy_eval, t, x1, x1_diff, x2, x2_diff
 
 
 class MultidimensionalSolver(AbstractSolver):
@@ -42,22 +36,22 @@ class MultidimensionalSolver(AbstractSolver):
     def __init__(
         self,
         L: str,
-        t0: float,
-        t1: float,
-        x1_0: float,
-        x1_1: float,
-        x2_0: float,
-        x2_1: float,
+        t0: str,
+        t1: str,
+        x1_0: str,
+        x1_1: str,
+        x2_0: str,
+        x2_1: str,
     ):
         self._L_str = L
 
-        self.L = eval(L)
-        self.t0 = t0
-        self.t1 = t1
-        self.x1_0 = x1_0
-        self.x1_1 = x1_1
-        self.x2_0 = x2_0
-        self.x2_1 = x2_1
+        self.L = sympy_eval(L)
+        self.t0 = sympy_eval(t0)
+        self.t1 = sympy_eval(t1)
+        self.x1_0 = sympy_eval(x1_0)
+        self.x1_1 = sympy_eval(x1_1)
+        self.x2_0 = sympy_eval(x2_0)
+        self.x2_1 = sympy_eval(x2_1)
 
     def __str__(self):
         task = f"integral from {self.t0} to {self.t1} of ({self._L_str})dt -> extr\n"
@@ -191,28 +185,31 @@ class MultidimensionalSolver(AbstractSolver):
 
 
 if __name__ == "__main__":
+
+    # argparse
     parser = ArgumentParser()
     parser.add_argument("-L", type=str, required=True, help="integrand")
     parser.add_argument(
-        "-t0", type=float, required=True, help="lower limit of the integral"
+        "-t0", type=str, required=True, help="lower limit of the integral"
     )
     parser.add_argument(
-        "-t1", type=float, required=True, help="upper limit of the integral"
+        "-t1", type=str, required=True, help="upper limit of the integral"
     )
     parser.add_argument(
-        "-x1_0", type=float, required=True, help="boundary condition of x1 in t0"
+        "-x1_0", type=str, required=True, help="boundary condition of x1 in t0"
     )
     parser.add_argument(
-        "-x1_1", type=float, required=True, help="boundary condition of x1 in t1"
+        "-x1_1", type=str, required=True, help="boundary condition of x1 in t1"
     )
     parser.add_argument(
-        "-x2_0", type=float, required=True, help="boundary condition of x2 in t0"
+        "-x2_0", type=str, required=True, help="boundary condition of x2 in t0"
     )
     parser.add_argument(
-        "-x2_1", type=float, required=True, help="boundary condition of x2 in t1"
+        "-x2_1", type=str, required=True, help="boundary condition of x2 in t1"
     )
     args = parser.parse_args()
 
+    # solve
     MultidimensionalSolver(
         L=args.L,
         t0=args.t0,
