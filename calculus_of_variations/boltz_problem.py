@@ -1,11 +1,8 @@
-import sys
 from argparse import ArgumentParser
 
 from sympy import Function, diff, dsolve, integrate, solve, var
 
-# TODO: fix it
-sys.path.append("./")
-from calculus_of_variations.abstract_problem import AbstractSolver
+from .abstract_problem import AbstractSolver
 
 t = var("t")
 x = Function("x")(t)
@@ -123,6 +120,8 @@ class BoltzSolver(AbstractSolver):
 
 
 if __name__ == "__main__":
+
+    # argparse
     parser = ArgumentParser()
     parser.add_argument("-L", type=str, required=True, help="integrand")
     parser.add_argument("-l", type=str, required=True, help="terminant")
@@ -134,4 +133,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    # solve
     BoltzSolver(L=args.L, l=args.l, t0=args.t0, t1=args.t1).solve()

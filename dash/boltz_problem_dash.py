@@ -3,63 +3,110 @@ import sys
 
 import dash_core_components as dcc
 import dash_html_components as html
+from utils import print_coefficients
 
 import dash
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations.boltz_problem import BoltzSolver
+from calculus_of_variations import BoltzSolver
+
+render_latex_url = r"https://render.githubusercontent.com/render/math?math"
+
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(
     [
-        dcc.Markdown("""# Boltz problem dash"""),
-        html.Div([html.Label("Enter L"), dcc.Input(id="L")]),
-        html.H4(""),
-        html.Div([html.Label("Enter l"), dcc.Input(id="l")]),
-        html.H4(""),
-        html.Div([html.Label("Enter t0"), dcc.Input(id="t0")]),
-        html.H4(""),
-        html.Div([html.Label("Enter t1"), dcc.Input(id="t1")]),
-        html.H4(""),
-        html.Div(id="my_input"),
+        dcc.Markdown("""# Boltz problem"""),
+        dcc.Markdown("""### Input"""),
+        html.Div(
+            [
+                dcc.Markdown("Enter **L**:"),
+                dcc.Input(id="L", value="x_diff ** 2 + 2 * x", type="text"),
+            ]
+        ),
+        html.Br(),
+        html.Div(
+            [
+                dcc.Markdown("Enter **l**:"),
+                dcc.Input(id="l", value="x_t0 ** 2", type="text"),
+            ]
+        ),
+        html.Br(),
+        html.Div(
+            [dcc.Markdown("Enter **t0**:"), dcc.Input(id="t0", value=0, type="number")]
+        ),
+        html.Br(),
+        html.Div(
+            [dcc.Markdown("Enter **t1**:"), dcc.Input(id="t1", value=1, type="number")]
+        ),
+        html.Br(),
+        html.Button("solve", id="solve"),
+        html.Br(),
+        html.Div(id="input"),
     ]
 )
 
 
 @app.callback(
-    Output("my_input", "children"),
+    Output(component_id="input", component_property="children"),
+    [Input("solve", "n_clicks")],
     [
-        Input("L", "value"),
-        Input("l", "value"),
-        Input("t0", "value"),
-        Input("t1", "value"),
+        State("L", "value"),
+        State("l", "value"),
+        State("t0", "value"),
+        State("t1", "value"),
     ],
 )
-def update_output(L, l, t0, t1):
-    if (L is not None) & (l is not None) & (t0 is not None) & (t1 is not None):
+def update_output(n_clicks, L, l, t0, t1):
 
-        solver = BoltzSolver(L=L, l=l, t0=float(t0), t1=float(t1))
-        try:
-            solver.solve()
-        except:
-            to_return = "Something went wrong :("
-        else:
-            to_return = html.Div(
-                [
-                    dcc.Markdown("### ANSWER"),
-                    dcc.Markdown(f"General solution: {solver.general_solution}"),
-                    dcc.Markdown(f"Coefficients: {solver.coefficients}"),
-                    dcc.Markdown(f"Particular solution: {solver.particular_solution}"),
-                    dcc.Markdown(f"Extrema value: {solver.extrema_value}"),
-                ],
-                style={"columnCount": 3},
-            )
+    # click "solve"
+    if n_clicks is None:
+        return
 
-        return to_return
+    try:
+        solver = BoltzSolver(L=L, l=l, t0=t0, t1=t1)
+        solver.solve()
+
+    except:
+        to_return = html.Div(dcc.Markdown("### Something went wrong :("))
+
+    else:
+        to_return = html.Div(
+            [
+                html.Div(
+                    [
+                        dcc.Markdown("""### Problem"""),
+                        html.Img(
+                            src=rf"{render_latex_url}=B(x) = \int_{t0}^{t1} \verb|({L})| + \verb|({l})| dt \to extr".replace(
+                                "+", "%2B"
+                            )
+                        ),
+                        html.Br(),
+                    ]
+                ),
+                html.Div(
+                    [
+                        dcc.Markdown("### Answer"),
+                        dcc.Markdown(
+                            f"**General solution**: {solver.general_solution}"
+                        ),
+                        dcc.Markdown(
+                            f"**Coefficients**: {print_coefficients(solver.coefficients)}"
+                        ),
+                        dcc.Markdown(
+                            f"**Particular solution**: {solver.particular_solution}"
+                        ),
+                        dcc.Markdown(f"**Extrema value**: {solver.extrema_value}"),
+                    ]
+                ),
+            ]
+        )
+
+    return to_return
 
 
 if __name__ == "__main__":

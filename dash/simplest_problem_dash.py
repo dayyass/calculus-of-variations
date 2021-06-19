@@ -25,7 +25,7 @@ app.layout = html.Div(
         html.Div(
             [
                 dcc.Markdown("Enter **L**:"),
-                dcc.Input(id="L", value="x_diff**2", type="text"),
+                dcc.Input(id="L", value="x_diff ** 2", type="text"),
             ]
         ),
         html.Br(),
@@ -83,7 +83,9 @@ def update_output(n_clicks, L, t0, t1, x0, x1):
                     [
                         dcc.Markdown("""### Problem"""),
                         html.Img(
-                            src=rf"{render_latex_url}=I(x) = \int_{t0}^{t1} \verb|({L})| dt \to extr"
+                            src=rf"{render_latex_url}=I(x) = \int_{t0}^{t1} \verb|({L})| dt \to extr".replace(
+                                "+", "%2B"
+                            )
                         ),
                         html.Br(),
                         html.Img(src=f"{render_latex_url}=x({t0}) = {x0}"),
