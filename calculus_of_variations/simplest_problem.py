@@ -29,22 +29,14 @@ class SimplestProblemSolver(AbstractSolver):
     C1 = var("C1")
     C2 = var("C2")
 
-    def __init__(self, L: str, t0: float, t1: float, x0: float, x1: float):
-        """
-
-        @param L:
-        @param t0:
-        @param t1:
-        @param x0:
-        @param x1:
-        """
+    def __init__(self, L: str, t0: str, t1: str, x0: str, x1: str):
         self._L_str = L
 
         self.L = sympy_eval(L)
-        self.t0 = t0
-        self.t1 = t1
-        self.x0 = x0
-        self.x1 = x1
+        self.t0 = sympy_eval(t0)
+        self.t1 = sympy_eval(t1)
+        self.x0 = sympy_eval(x0)
+        self.x1 = sympy_eval(x1)
 
     def __str__(self):
         task = f"integral from {self.t0} to {self.t1} of ({self._L_str})dt -> extr\n"
@@ -116,9 +108,5 @@ if __name__ == "__main__":
 
     # solve
     SimplestProblemSolver(
-        L=args.L,
-        t0=sympy_eval(args.t0),
-        x0=sympy_eval(args.x0),
-        t1=sympy_eval(args.t1),
-        x1=sympy_eval(args.x1),
+        L=args.L, t0=args.t0, x0=args.x0, t1=args.t1, x1=args.x1
     ).solve()

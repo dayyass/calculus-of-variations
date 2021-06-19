@@ -28,14 +28,14 @@ class BoltzSolver(AbstractSolver):
     C1 = var("C1")
     C2 = var("C2")
 
-    def __init__(self, L: str, l: str, t0: float, t1: float):
+    def __init__(self, L: str, l: str, t0: str, t1: str):
         self._L_str = L
         self._l_str = l
 
         self.L = sympy_eval(L)
         self.l = sympy_eval(l)
-        self.t0 = t0
-        self.t1 = t1
+        self.t0 = sympy_eval(t0)
+        self.t1 = sympy_eval(t1)
 
     def __str__(self):
         task = f"integral from {self.t0} to {self.t1} of ({self._L_str})dt + {self._l_str} -> extr\n"
@@ -129,9 +129,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # solve
-    BoltzSolver(
-        L=args.L,
-        l=args.l,
-        t0=sympy_eval(args.t0),
-        t1=sympy_eval(args.t1),
-    ).solve()
+    BoltzSolver(L=args.L, l=args.l, t0=args.t0, t1=args.t1).solve()

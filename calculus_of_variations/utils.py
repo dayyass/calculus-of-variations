@@ -67,13 +67,14 @@ t = var("t")
 x = Function("x")(t)
 x_diff = diff(x, t)
 
-# Boltz
+# boltz
 t0 = var("t0")
 t1 = var("t1")
 x_t0 = Function("x")(t0)
 x_t1 = Function("x")(t1)
 
 
+# TODO: ast eval
 def sympy_eval(string) -> Any:
     """
     Eval string.

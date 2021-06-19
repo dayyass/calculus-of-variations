@@ -1,6 +1,5 @@
 import sys
 from argparse import ArgumentParser
-from typing import List
 
 from sympy import diff, dsolve, integrate, solve, var
 
@@ -36,23 +35,23 @@ class IsoperimetricProblemSolver(AbstractSolver):
     def __init__(
         self,
         f0: str,
-        t0: float,
-        t1: float,
-        x0: float,
-        x1: float,
-        f_list: List[str],
-        alpha_list: List[str],
+        t0: str,
+        t1: str,
+        x0: str,
+        x1: str,
+        f_list: str,
+        alpha_list: str,
     ):
         self._f0_str = f0
         self._f_str_list = f_list
 
         self.f0 = sympy_eval(f0)
-        self.t0 = t0
-        self.t1 = t1
-        self.x0 = x0
-        self.x1 = x1
-        self.f_list = [sympy_eval(f.strip()) for f in f_list]
-        self.alpha_list = [sympy_eval(alpha.strip()) for alpha in alpha_list]
+        self.t0 = sympy_eval(t0)
+        self.t1 = sympy_eval(t1)
+        self.x0 = sympy_eval(x0)
+        self.x1 = sympy_eval(x1)
+        self.f_list = [sympy_eval(f.strip()) for f in f_list.split(",")]
+        self.alpha_list = [sympy_eval(alpha.strip()) for alpha in alpha_list.split(",")]
 
     def __str__(self):
         task = f"integral from {self.t0} to {self.t1} of ({self._f0_str})dt -> extr\n"
@@ -177,10 +176,10 @@ if __name__ == "__main__":
     # solve
     IsoperimetricProblemSolver(
         f0=args.f0,
-        t0=sympy_eval(args.t0),
-        x0=sympy_eval(args.x0),
-        t1=sympy_eval(args.t1),
-        x1=sympy_eval(args.x1),
-        f_list=args.f_list.split(","),
-        alpha_list=args.alpha_list.split(","),
+        t0=args.t0,
+        x0=args.x0,
+        t1=args.t1,
+        x1=args.x1,
+        f_list=args.f_list,
+        alpha_list=args.alpha_list,
     ).solve()
