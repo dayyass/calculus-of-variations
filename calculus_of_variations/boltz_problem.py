@@ -1,20 +1,12 @@
 import sys
 from argparse import ArgumentParser
 
-from sympy import Function, diff, dsolve, integrate, solve, var
+from sympy import diff, dsolve, integrate, solve, var
 
 # TODO: fix it
 sys.path.append("./")
 from calculus_of_variations.abstract_problem import AbstractSolver
-
-t = var("t")
-x = Function("x")(t)
-x_diff = diff(x, t)
-
-t0 = var("t0")
-t1 = var("t1")
-x_t0 = Function("x")(t0)
-x_t1 = Function("x")(t1)
+from calculus_of_variations.utils import sympy_eval, t, x, x_diff, x_t0, x_t1
 
 
 class BoltzSolver(AbstractSolver):
@@ -40,8 +32,8 @@ class BoltzSolver(AbstractSolver):
         self._L_str = L
         self._l_str = l
 
-        self.L = eval(L)
-        self.l = eval(l)
+        self.L = sympy_eval(L)
+        self.l = sympy_eval(l)
         self.t0 = t0
         self.t1 = t1
 
@@ -129,12 +121,17 @@ if __name__ == "__main__":
     parser.add_argument("-L", type=str, required=True, help="integrand")
     parser.add_argument("-l", type=str, required=True, help="terminant")
     parser.add_argument(
-        "-t0", type=float, required=True, help="lower limit of the integral"
+        "-t0", type=str, required=True, help="lower limit of the integral"
     )
     parser.add_argument(
-        "-t1", type=float, required=True, help="upper limit of the integral"
+        "-t1", type=str, required=True, help="upper limit of the integral"
     )
     args = parser.parse_args()
 
     # solve
-    BoltzSolver(L=args.L, l=args.l, t0=args.t0, t1=args.t1).solve()
+    BoltzSolver(
+        L=args.L,
+        l=args.l,
+        t0=sympy_eval(args.t0),
+        t1=sympy_eval(args.t1),
+    ).solve()

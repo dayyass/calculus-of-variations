@@ -1,15 +1,12 @@
 import sys
 from argparse import ArgumentParser
 
-from sympy import Function, diff, dsolve, integrate, solve, var
+from sympy import diff, dsolve, integrate, solve, var
 
 # TODO: fix it
 sys.path.append("./")
 from calculus_of_variations.abstract_problem import AbstractSolver
-
-t = var("t")
-x = Function("x")(t)
-x_diff = diff(x, t)
+from calculus_of_variations.utils import sympy_eval, t, x, x_diff
 
 
 class SimplestProblemSolver(AbstractSolver):
@@ -43,7 +40,7 @@ class SimplestProblemSolver(AbstractSolver):
         """
         self._L_str = L
 
-        self.L = eval(L)
+        self.L = sympy_eval(L)
         self.t0 = t0
         self.t1 = t1
         self.x0 = x0
@@ -108,21 +105,20 @@ if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("-L", type=str, required=True, help="integrand")
     parser.add_argument(
-        "-t0", type=float, required=True, help="lower limit of the integral"
+        "-t0", type=str, required=True, help="lower limit of the integral"
     )
     parser.add_argument(
-        "-t1", type=float, required=True, help="upper limit of the integral"
+        "-t1", type=str, required=True, help="upper limit of the integral"
     )
-    parser.add_argument(
-        "-x0", type=float, required=True, help="boundary condition in t0"
-    )
-    parser.add_argument(
-        "-x1", type=float, required=True, help="boundary condition in t1"
-    )
+    parser.add_argument("-x0", type=str, required=True, help="boundary condition in t0")
+    parser.add_argument("-x1", type=str, required=True, help="boundary condition in t1")
     args = parser.parse_args()
-    print(args.x1, type(args.x1))
 
     # solve
     SimplestProblemSolver(
-        L=args.L, t0=args.t0, x0=args.x0, t1=args.t1, x1=args.x1
+        L=args.L,
+        t0=sympy_eval(args.t0),
+        x0=sympy_eval(args.x0),
+        t1=sympy_eval(args.t1),
+        x1=sympy_eval(args.x1),
     ).solve()
