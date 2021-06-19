@@ -56,3 +56,23 @@ def dash_simplest_problem(
             html.Br(),
         ]
     )
+
+
+def dash_boltz_problem(
+    solver,
+    render_latex_url=r"https://render.githubusercontent.com/render/math?math",
+):
+    """
+    Helper function to print boltz problem.
+    """
+
+    return html.Div(
+        [
+            html.Img(
+                src=rf"{render_latex_url}=B(x) = \int_{solver.t0}^{solver.t1} \verb|({solver.L})| + \verb|({solver.l})| dt \to extr".replace(
+                    "+", "%2B"
+                )
+            ),
+            html.Br(),
+        ]
+    )
