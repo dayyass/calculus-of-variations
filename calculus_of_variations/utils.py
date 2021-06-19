@@ -73,6 +73,12 @@ t1 = var("t1")
 x_t0 = Function("x")(t0)
 x_t1 = Function("x")(t1)
 
+# higher derivatives
+x_diff_2 = diff(x, t, 2)
+x_diff_3 = diff(x, t, 3)
+x_diff_4 = diff(x, t, 4)
+x_diff_5 = diff(x, t, 5)
+
 
 # TODO: ast eval
 def sympy_eval(string) -> Any:
