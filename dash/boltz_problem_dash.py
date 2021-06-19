@@ -1,3 +1,4 @@
+import argparse
 import sys
 
 import dash_core_components as dcc
@@ -62,4 +63,31 @@ def update_output(L, l, t0, t1):
 
 
 if __name__ == "__main__":
-    app.run_server(port=8060)
+
+    # argparse
+    parser = argparse.ArgumentParser(description="Server configuration")
+    parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        type=str,
+        required=False,
+        help="Host IP used to serve the application",
+    )
+    parser.add_argument(
+        "--port",
+        default=8050,
+        type=int,
+        required=False,
+        help="Port used to serve the application",
+    )
+    parser.add_argument(
+        "--debug",
+        default=False,
+        type=bool,
+        required=False,
+        help="Set Flask debug mode and enable dev tools",
+    )
+    args = parser.parse_args()
+
+    # run server
+    app.run_server(host=args.host, port=args.port, debug=args.debug)
