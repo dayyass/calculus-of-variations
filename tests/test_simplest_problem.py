@@ -1,8 +1,11 @@
+import sys
 import unittest
 
 from parameterized import parameterized_class
 from sympy.functions import exp, log
 
+# TODO: fix it
+sys.path.append("./")
 from calculus_of_variations.simplest_problem import SimplestProblemSolver, t
 
 C1 = SimplestProblemSolver.C1

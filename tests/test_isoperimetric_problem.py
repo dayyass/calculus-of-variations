@@ -1,3 +1,4 @@
+import sys
 import unittest
 from typing import List
 
@@ -5,6 +6,8 @@ from parameterized import parameterized_class
 from sympy import pi, var
 from sympy.functions import cos
 
+# TODO: fix it
+sys.path.append("./")
 from calculus_of_variations.isoperimetric_problem import IsoperimetricProblemSolver, t
 
 C1 = IsoperimetricProblemSolver.C1

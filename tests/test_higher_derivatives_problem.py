@@ -1,9 +1,12 @@
+import sys
 import unittest
 from typing import List
 
 from parameterized import parameterized_class
 from sympy import var
 
+# TODO: fix it
+sys.path.append("./")
 from calculus_of_variations.higher_derivatives_problem import HigherDerivativesSolver, t
 
 Cs = {}

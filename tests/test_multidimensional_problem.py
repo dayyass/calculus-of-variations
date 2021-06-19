@@ -1,9 +1,12 @@
+import sys
 import unittest
 
 from parameterized import parameterized_class
 from sympy import I, pi
 from sympy.functions import exp
 
+# TODO: fix it
+sys.path.append("./")
 from calculus_of_variations.multidimensional_problem import MultidimensionalSolver, t
 
 C1 = MultidimensionalSolver.C1
