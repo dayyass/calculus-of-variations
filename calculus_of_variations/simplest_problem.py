@@ -1,11 +1,8 @@
-import sys
 from argparse import ArgumentParser
 
 from sympy import Function, diff, dsolve, integrate, solve, var
 
-# TODO: fix it
-sys.path.append("./")
-from calculus_of_variations.abstract_problem import AbstractSolver
+from .abstract_problem import AbstractSolver
 
 t = var("t")
 x = Function("x")(t)
@@ -103,6 +100,8 @@ class SimplestProblemSolver(AbstractSolver):
 
 
 if __name__ == "__main__":
+
+    # argparse
     parser = ArgumentParser()
     parser.add_argument("-L", type=str, required=True, help="integrand")
     parser.add_argument(
@@ -119,6 +118,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    # solve
     SimplestProblemSolver(
         L=args.L, t0=args.t0, x0=args.x0, t1=args.t1, x1=args.x1
     ).solve()
