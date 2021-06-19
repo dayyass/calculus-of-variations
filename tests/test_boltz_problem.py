@@ -5,20 +5,15 @@ from parameterized import parameterized_class
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations.boltz_problem import BoltzSolver
-from calculus_of_variations.utils import log, sympy_eval, t
+from calculus_of_variations import BoltzSolver
+from calculus_of_variations.utils import log, t
 
 C1 = BoltzSolver.C1
 C2 = BoltzSolver.C2
 
 
 def make_solution(L: str, l: str, t0: str, t1: str):
-    solution = BoltzSolver(
-        L=L,
-        l=l,
-        t0=sympy_eval(t0),
-        t1=sympy_eval(t1),
-    )
+    solution = BoltzSolver(L=L, l=l, t0=t0, t1=t1)
     solution.solve(verbose=False)
     return solution
 
