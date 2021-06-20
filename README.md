@@ -3,6 +3,7 @@
 [![codecov](https://codecov.io/gh/dayyass/calculus_of_variations/branch/master/graph/badge.svg?token=H8OFWPPUOY)](https://codecov.io/gh/dayyass/calculus_of_variations)
 [![license](https://img.shields.io/github/license/dayyass/calculus_of_variations)](LICENSE)
 [![release (latest by date)](https://img.shields.io/github/v/release/dayyass/calculus_of_variations)](https://github.com/dayyass/calculus_of_variations/releases/latest)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/dayyass/calculus_of_variations/blob/master/.pre-commit-config.yaml)
 [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ### About
