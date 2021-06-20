@@ -1,9 +1,18 @@
+import sys
 from argparse import ArgumentParser
 from typing import Dict
 
 import dash_core_components as dcc
 import dash_html_components as html
 from sympy.core.symbol import Symbol
+
+# TODO: fix it
+sys.path.append("./")
+from calculus_of_variations import (
+    BoltzSolver,
+    IsoperimetricProblemSolver,
+    SimplestProblemSolver,
+)
 
 
 def get_argparse() -> ArgumentParser:
@@ -76,12 +85,16 @@ def dash_answer(solver):
 
 
 def dash_simplest_problem(
-    solver,
-    render_latex_url=r"https://render.githubusercontent.com/render/math?math",
+    solver: SimplestProblemSolver,
+    render_latex_url: str = r"https://render.githubusercontent.com/render/math?math",
 ):
     """
     Helper function to print simplest problem.
     """
+
+    assert isinstance(
+        solver, SimplestProblemSolver
+    ), f"solver should be SimplestProblemSolver, not {type(solver)}."
 
     return html.Div(
         [
@@ -100,12 +113,16 @@ def dash_simplest_problem(
 
 
 def dash_boltz_problem(
-    solver,
-    render_latex_url=r"https://render.githubusercontent.com/render/math?math",
+    solver: BoltzSolver,
+    render_latex_url: str = r"https://render.githubusercontent.com/render/math?math",
 ):
     """
     Helper function to print boltz problem.
     """
+
+    assert isinstance(
+        solver, BoltzSolver
+    ), f"solver should be BoltzSolver, not {type(solver)}."
 
     return html.Div(
         [
@@ -120,12 +137,16 @@ def dash_boltz_problem(
 
 
 def dash_isoperimetric_problem(
-    solver,
-    render_latex_url=r"https://render.githubusercontent.com/render/math?math",
+    solver: IsoperimetricProblemSolver,
+    render_latex_url: str = r"https://render.githubusercontent.com/render/math?math",
 ):
     """
     Helper function to print isoperimetric problem.
     """
+
+    assert isinstance(
+        solver, IsoperimetricProblemSolver
+    ), f"solver should be IsoperimetricProblemSolver, not {type(solver)}."
 
     problem = [
         html.Img(
