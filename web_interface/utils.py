@@ -1,6 +1,6 @@
 import sys
 from argparse import ArgumentParser
-from typing import Dict
+from typing import Dict, Union
 
 import dash_core_components as dcc
 import dash_html_components as html
@@ -8,7 +8,12 @@ from sympy.core.symbol import Symbol
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import BoltzSolver, IsoperimetricSolver, SimplestSolver
+from calculus_of_variations import (
+    BoltzSolver,
+    HigherDerivativesSolver,
+    IsoperimetricSolver,
+    SimplestSolver,
+)
 
 
 def get_argparse() -> ArgumentParser:
@@ -54,7 +59,11 @@ def print_coefficients(coefficients: Dict[Symbol, float]) -> str:
     return ", ".join([f"{k} = {v}" for k, v in coefficients.items()])
 
 
-def dash_answer(solver):
+def dash_answer(
+    solver: Union[
+        BoltzSolver, IsoperimetricSolver, SimplestSolver, HigherDerivativesSolver
+    ]
+):
     """
     Helper function to print solver answer.
     """
@@ -173,5 +182,47 @@ def dash_isoperimetric_problem(
             html.Br(),
         ]
     )
+
+    return html.Div(problem)
+
+
+def dash_higher_derivatives_problem(
+    solver: HigherDerivativesSolver,
+    render_latex_url: str = r"https://render.githubusercontent.com/render/math?math",
+):
+    """
+    Helper function to print higher derivatives problem.
+    """
+
+    assert isinstance(
+        solver, HigherDerivativesSolver
+    ), f"solver should be HigherDerivativesSolver, not {type(solver)}."
+
+    problem = [
+        html.Img(
+            src=rf"{render_latex_url}=I(x) = \int_{solver.t0}^{solver.t1} \verb|({solver.L})| dt \to extr".replace(
+                "+", "%2B"
+            )
+        ),
+        html.Br(),
+        html.Img(src=rf"{render_latex_url}=x({solver.t0}) = {solver.x0}"),
+        html.Br(),
+        html.Img(src=rf"{render_latex_url}=x({solver.t1}) = {solver.x1}"),
+        html.Br(),
+    ]
+
+    for i in range(1, solver.n):
+        problem.extend(
+            [
+                html.Img(
+                    src=rf"{render_latex_url}=\verb|x_diff_{i}({solver.t0}) = {solver.x0_array[i-1]}|"
+                ),
+                html.Br(),
+                html.Img(
+                    src=rf"{render_latex_url}=\verb|x_diff_{i}({solver.t1}) = {solver.x1_array[i-1]}|"
+                ),
+                html.Br(),
+            ]
+        )
 
     return html.Div(problem)
