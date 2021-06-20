@@ -12,6 +12,7 @@ from calculus_of_variations import (
     BoltzSolver,
     HigherDerivativesSolver,
     IsoperimetricSolver,
+    MultidimensionalSolver,
     SimplestSolver,
 )
 
@@ -68,25 +69,58 @@ def dash_answer(
     Helper function to print solver answer.
     """
 
-    return html.Div(
-        [
-            dcc.Markdown(
-                r"**General solution**: "
-                + str(solver.general_solution).replace("*", r"\*")
-            ),
-            dcc.Markdown(
-                r"**Coefficients**: "
-                + str(print_coefficients(solver.coefficients)).replace("*", r"\*")
-            ),
-            dcc.Markdown(
-                r"**Particular solution**: "
-                + str(solver.particular_solution).replace("*", r"\*")
-            ),
-            dcc.Markdown(
-                r"**Extrema value**: " + str(solver.extrema_value).replace("*", r"\*")
-            ),
-        ]
-    )
+    answer = [
+        dcc.Markdown(
+            r"**General solution**: " + str(solver.general_solution).replace("*", r"\*")
+        ),
+        dcc.Markdown(
+            r"**Coefficients**: "
+            + str(print_coefficients(solver.coefficients)).replace("*", r"\*")
+        ),
+        dcc.Markdown(
+            r"**Particular solution**: "
+            + str(solver.particular_solution).replace("*", r"\*")
+        ),
+        dcc.Markdown(
+            r"**Extrema value**: " + str(solver.extrema_value).replace("*", r"\*")
+        ),
+    ]
+
+    return html.Div(answer)
+
+
+def dash_multidimensional_answer(solver: MultidimensionalSolver):
+    """
+    Helper function to print multidimensional solver answer.
+    """
+
+    answer = [
+        dcc.Markdown(
+            r"**General solution 1**: "
+            + str(solver.general_solution_1).replace("*", r"\*")
+        ),
+        dcc.Markdown(
+            r"**General solution 2**: "
+            + str(solver.general_solution_2).replace("*", r"\*")
+        ),
+        dcc.Markdown(
+            r"**Coefficients**: "
+            + str(print_coefficients(solver.coefficients)).replace("*", r"\*")
+        ),
+        dcc.Markdown(
+            r"**Particular solution_1**: "
+            + str(solver.particular_solution_1).replace("*", r"\*")
+        ),
+        dcc.Markdown(
+            r"**Particular solution_2**: "
+            + str(solver.particular_solution_2).replace("*", r"\*")
+        ),
+        dcc.Markdown(
+            r"**Extrema value**: " + str(solver.extrema_value).replace("*", r"\*")
+        ),
+    ]
+
+    return html.Div(answer)
 
 
 def dash_simplest_problem(
@@ -101,20 +135,20 @@ def dash_simplest_problem(
         solver, SimplestSolver
     ), f"solver should be SimplestSolver, not {type(solver)}."
 
-    return html.Div(
-        [
-            html.Img(
-                src=rf"{render_latex_url}=I(x) = \int_{solver.t0}^{solver.t1} \verb|({solver.L})| dt \to extr".replace(
-                    "+", "%2B"
-                )
-            ),
-            html.Br(),
-            html.Img(src=f"{render_latex_url}=x({solver.t0}) = {solver.x0}"),
-            html.Br(),
-            html.Img(src=f"{render_latex_url}=x({solver.t1}) = {solver.x1}"),
-            html.Br(),
-        ]
-    )
+    problem = [
+        html.Img(
+            src=rf"{render_latex_url}=I(x) = \int_{solver.t0}^{solver.t1} \verb|({solver.L})| dt \to extr".replace(
+                "+", "%2B"
+            )
+        ),
+        html.Br(),
+        html.Img(src=f"{render_latex_url}=x({solver.t0}) = {solver.x0}"),
+        html.Br(),
+        html.Img(src=f"{render_latex_url}=x({solver.t1}) = {solver.x1}"),
+        html.Br(),
+    ]
+
+    return html.Div(problem)
 
 
 def dash_boltz_problem(
@@ -129,16 +163,16 @@ def dash_boltz_problem(
         solver, BoltzSolver
     ), f"solver should be BoltzSolver, not {type(solver)}."
 
-    return html.Div(
-        [
-            html.Img(
-                src=rf"{render_latex_url}=B(x) = \int_{solver.t0}^{solver.t1} \verb|({solver.L})| + \verb|({solver.l})| dt \to extr".replace(
-                    "+", "%2B"
-                )
-            ),
-            html.Br(),
-        ]
-    )
+    problem = [
+        html.Img(
+            src=rf"{render_latex_url}=B(x) = \int_{solver.t0}^{solver.t1} \verb|({solver.L})| + \verb|({solver.l})| dt \to extr".replace(
+                "+", "%2B"
+            )
+        ),
+        html.Br(),
+    ]
+
+    return html.Div(problem)
 
 
 def dash_isoperimetric_problem(
@@ -224,5 +258,37 @@ def dash_higher_derivatives_problem(
                 html.Br(),
             ]
         )
+
+    return html.Div(problem)
+
+
+def dash_multidimensional_problem(
+    solver: MultidimensionalSolver,
+    render_latex_url: str = r"https://render.githubusercontent.com/render/math?math",
+):
+    """
+    Helper function to print multidimensional problem.
+    """
+
+    assert isinstance(
+        solver, MultidimensionalSolver
+    ), f"solver should be MultidimensionalSolver, not {type(solver)}."
+
+    problem = [
+        html.Img(
+            src=rf"{render_latex_url}=I(x) = \int_{solver.t0}^{solver.t1} \verb|({solver.L})| dt \to extr".replace(
+                "+", "%2B"
+            )
+        ),
+        html.Br(),
+        html.Img(src=rf"{render_latex_url}=x_1({solver.t0}) = {solver.x1_0}"),
+        html.Br(),
+        html.Img(src=rf"{render_latex_url}=x_1({solver.t1}) = {solver.x1_1}"),
+        html.Br(),
+        html.Img(src=rf"{render_latex_url}=x_2({solver.t0}) = {solver.x2_0}"),
+        html.Br(),
+        html.Img(src=rf"{render_latex_url}=x_2({solver.t1}) = {solver.x2_1}"),
+        html.Br(),
+    ]
 
     return html.Div(problem)
