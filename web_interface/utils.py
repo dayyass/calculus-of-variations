@@ -8,11 +8,7 @@ from sympy.core.symbol import Symbol
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import (
-    BoltzSolver,
-    IsoperimetricProblemSolver,
-    SimplestProblemSolver,
-)
+from calculus_of_variations import BoltzSolver, IsoperimetricSolver, SimplestSolver
 
 
 def get_argparse() -> ArgumentParser:
@@ -85,7 +81,7 @@ def dash_answer(solver):
 
 
 def dash_simplest_problem(
-    solver: SimplestProblemSolver,
+    solver: SimplestSolver,
     render_latex_url: str = r"https://render.githubusercontent.com/render/math?math",
 ):
     """
@@ -93,8 +89,8 @@ def dash_simplest_problem(
     """
 
     assert isinstance(
-        solver, SimplestProblemSolver
-    ), f"solver should be SimplestProblemSolver, not {type(solver)}."
+        solver, SimplestSolver
+    ), f"solver should be SimplestSolver, not {type(solver)}."
 
     return html.Div(
         [
@@ -137,7 +133,7 @@ def dash_boltz_problem(
 
 
 def dash_isoperimetric_problem(
-    solver: IsoperimetricProblemSolver,
+    solver: IsoperimetricSolver,
     render_latex_url: str = r"https://render.githubusercontent.com/render/math?math",
 ):
     """
@@ -145,8 +141,8 @@ def dash_isoperimetric_problem(
     """
 
     assert isinstance(
-        solver, IsoperimetricProblemSolver
-    ), f"solver should be IsoperimetricProblemSolver, not {type(solver)}."
+        solver, IsoperimetricSolver
+    ), f"solver should be IsoperimetricSolver, not {type(solver)}."
 
     problem = [
         html.Img(

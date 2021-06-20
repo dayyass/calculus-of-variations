@@ -8,7 +8,7 @@ from dash.dependencies import Input, Output, State
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import IsoperimetricProblemSolver
+from calculus_of_variations import IsoperimetricSolver
 from web_interface.utils import dash_answer, dash_isoperimetric_problem, get_argparse
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
@@ -82,7 +82,7 @@ def update_output(n_clicks, f0, t0, t1, x0, x1, f_list, alpha_list):
         return
 
     try:
-        solver = IsoperimetricProblemSolver(
+        solver = IsoperimetricSolver(
             f0=f0,
             t0=t0,
             t1=t1,

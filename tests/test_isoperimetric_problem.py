@@ -5,12 +5,12 @@ from parameterized import parameterized_class
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import IsoperimetricProblemSolver
+from calculus_of_variations import IsoperimetricSolver
 from calculus_of_variations.utils import cos, pi, t, var
 
-C1 = IsoperimetricProblemSolver.C1
-C2 = IsoperimetricProblemSolver.C2
-lambda_0 = IsoperimetricProblemSolver.lambda_0
+C1 = IsoperimetricSolver.C1
+C2 = IsoperimetricSolver.C2
+lambda_0 = IsoperimetricSolver.lambda_0
 lambda_1 = var("lambda_1")
 lambda_2 = var("lambda_2")
 
@@ -18,7 +18,7 @@ lambda_2 = var("lambda_2")
 def make_solution(
     f0: str, t0: str, t1: str, x0: str, x1: str, f_list: str, alpha_list: str
 ):
-    solution = IsoperimetricProblemSolver(
+    solution = IsoperimetricSolver(
         f0=f0, t0=t0, t1=t1, x0=x0, x1=x1, f_list=f_list, alpha_list=alpha_list
     )
     solution.solve(verbose=False)

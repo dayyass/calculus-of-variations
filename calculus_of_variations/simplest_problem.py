@@ -9,7 +9,7 @@ from calculus_of_variations.abstract_problem import AbstractSolver
 from calculus_of_variations.utils import sympy_eval, t, x, x_diff
 
 
-class SimplestProblemSolver(AbstractSolver):
+class SimplestSolver(AbstractSolver):
 
     """
     Solver for simplest problem in calculus of variation.
@@ -22,7 +22,7 @@ class SimplestProblemSolver(AbstractSolver):
         x1: Boundary condition in t1.
 
     To use:
-        solution = SimplestProblemSolver(L='x_diff ** 2', t0=0, t1=1, x0=0, x1=1)
+        solution = SimplestSolver(L='x_diff ** 2', t0=0, t1=1, x0=0, x1=1)
         solution.solve(verbose=True)
     """
 
@@ -107,6 +107,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # solve
-    SimplestProblemSolver(
-        L=args.L, t0=args.t0, x0=args.x0, t1=args.t1, x1=args.x1
-    ).solve()
+    SimplestSolver(L=args.L, t0=args.t0, x0=args.x0, t1=args.t1, x1=args.x1).solve()

@@ -5,15 +5,15 @@ from parameterized import parameterized_class
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import SimplestProblemSolver
+from calculus_of_variations import SimplestSolver
 from calculus_of_variations.utils import log, t
 
-C1 = SimplestProblemSolver.C1
-C2 = SimplestProblemSolver.C2
+C1 = SimplestSolver.C1
+C2 = SimplestSolver.C2
 
 
 def make_solution(L: str, t0: str, t1: str, x0: str, x1: str):
-    solution = SimplestProblemSolver(L=L, t0=t0, t1=t1, x0=x0, x1=x1)
+    solution = SimplestSolver(L=L, t0=t0, t1=t1, x0=x0, x1=x1)
     solution.solve(verbose=False)
     return solution
 

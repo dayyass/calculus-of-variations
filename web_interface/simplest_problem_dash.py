@@ -8,7 +8,7 @@ from dash.dependencies import Input, Output, State
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import SimplestProblemSolver
+from calculus_of_variations import SimplestSolver
 from web_interface.utils import dash_answer, dash_simplest_problem, get_argparse
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
@@ -66,7 +66,7 @@ def update_output(n_clicks, L, t0, t1, x0, x1):
         return
 
     try:
-        solver = SimplestProblemSolver(L=L, t0=t0, t1=t1, x0=x0, x1=x1)
+        solver = SimplestSolver(L=L, t0=t0, t1=t1, x0=x0, x1=x1)
         solver.solve()
 
     except:

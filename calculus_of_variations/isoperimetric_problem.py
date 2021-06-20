@@ -9,7 +9,7 @@ from calculus_of_variations.abstract_problem import AbstractSolver
 from calculus_of_variations.utils import sympy_eval, t, x, x_diff
 
 
-class IsoperimetricProblemSolver(AbstractSolver):
+class IsoperimetricSolver(AbstractSolver):
 
     """
     Solver for isoperimetric problem in calculus of variation.
@@ -24,7 +24,7 @@ class IsoperimetricProblemSolver(AbstractSolver):
         alpha_list: Isoperimetric conditions value list.
 
     To use:
-        solution = IsoperimetricProblemSolver(f0='x_diff ** 2', t0=0, t1=1, x0=0, x1=1, f_list=['x'], alpha_list=[0])
+        solution = IsoperimetricSolver(f0='x_diff ** 2', t0=0, t1=1, x0=0, x1=1, f_list=['x'], alpha_list=[0])
         solution.solve(verbose=True)
     """
 
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # solve
-    IsoperimetricProblemSolver(
+    IsoperimetricSolver(
         f0=args.f0,
         t0=args.t0,
         x0=args.x0,
