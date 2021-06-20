@@ -21,7 +21,7 @@ class BoltzSolver(AbstractSolver):
         t1: Upper limit of the integral.
 
     To use:
-        solution = BoltzSolver(L='x_diff ** 2 + 2 * x', l='x_t0 ** 2', t0=0, t1=1)
+        solution = BoltzSolver(L="x_diff ** 2 + 2 * x", l="x_t0 ** 2", t0="0", t1="1")
         solution.solve(verbose=True)
     """
 
@@ -48,6 +48,7 @@ class BoltzSolver(AbstractSolver):
         """
         Find general solution.
         """
+
         self.L_x_diff = diff(self.L, x_diff)
         self.L_x = diff(self.L, x)
 
@@ -58,6 +59,7 @@ class BoltzSolver(AbstractSolver):
         """
         Find particular solution coefficients.
         """
+
         self.first_eq = (
             self.L_x_diff.subs(
                 [
@@ -88,12 +90,14 @@ class BoltzSolver(AbstractSolver):
         """
         Substitute particular solution coefficients to general solution.
         """
+
         super()._particular_solution()
 
     def _extrema_value(self):
         """
         Find extrema value for particular solution.
         """
+
         L_subs = self.L.subs(
             [(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)]
         )
@@ -111,6 +115,7 @@ class BoltzSolver(AbstractSolver):
         """
         Solve task using all encapsulated methods.
         """
+
         super().solve(verbose=verbose)
 
 

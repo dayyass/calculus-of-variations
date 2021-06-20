@@ -22,7 +22,7 @@ class SimplestSolver(AbstractSolver):
         x1: Boundary condition in t1.
 
     To use:
-        solution = SimplestSolver(L='x_diff ** 2', t0=0, t1=1, x0=0, x1=1)
+        solution = SimplestSolver(L="x_diff ** 2", t0="0", t1="1", x0="0", x1="1")
         solution.solve(verbose=True)
     """
 
@@ -51,6 +51,7 @@ class SimplestSolver(AbstractSolver):
         """
         Find general solution.
         """
+
         self.L_x_diff = diff(self.L, x_diff)
         self.L_x = diff(self.L, x)
 
@@ -61,6 +62,7 @@ class SimplestSolver(AbstractSolver):
         """
         Find particular solution coefficients.
         """
+
         self.first_eq = self.general_solution.subs(t, self.t0) - self.x0
         self.second_eq = self.general_solution.subs(t, self.t1) - self.x1
 
@@ -71,12 +73,14 @@ class SimplestSolver(AbstractSolver):
         """
         Substitute particular solution coefficients to general solution.
         """
+
         super()._particular_solution()
 
     def _extrema_value(self):
         """
         Find extrema value for particular solution.
         """
+
         L_subs = self.L.subs(
             [(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)]
         )
@@ -88,6 +92,7 @@ class SimplestSolver(AbstractSolver):
         """
         Solve task using all encapsulated methods.
         """
+
         super().solve(verbose=verbose)
 
 

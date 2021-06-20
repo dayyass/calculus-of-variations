@@ -20,11 +20,11 @@ class IsoperimetricSolver(AbstractSolver):
         t1: Upper limit of the integral.
         x0: Boundary condition in t0.
         x1: Boundary condition in t1.
-        f_list: Isoperimetric conditions integrand list.
-        alpha_list: Isoperimetric conditions value list.
+        f_list: Isoperimetric conditions integrand list (comma separated).
+        alpha_list: Isoperimetric conditions value list (comma separated).
 
     To use:
-        solution = IsoperimetricSolver(f0='x_diff ** 2', t0=0, t1=1, x0=0, x1=1, f_list=['x'], alpha_list=[0])
+        solution = IsoperimetricSolver(f0="x_diff ** 2", t0="0", t1="1", x0="0", x1="1", f_list="x", alpha_list="0")
         solution.solve(verbose=True)
     """
 
@@ -72,6 +72,7 @@ class IsoperimetricSolver(AbstractSolver):
         """
         Init lambdas for lagrangian function
         """
+
         self.lambdas = []
         for i in range(1, len(self.f_list) + 1):
             var(f"lambda_{i}")
@@ -81,6 +82,7 @@ class IsoperimetricSolver(AbstractSolver):
         """
         Init lagrangian function
         """
+
         self.equations = [self.first_eq, self.second_eq]
         self.params = [self.C1, self.C2]
 
@@ -99,6 +101,7 @@ class IsoperimetricSolver(AbstractSolver):
         """
         Find general solution.
         """
+
         self.L = self.lambda_0 * self.f0
         for i in range(len(self.f_list)):
             self.L += self.lambdas[i] * self.f_list[i]
@@ -113,6 +116,7 @@ class IsoperimetricSolver(AbstractSolver):
         """
         Find particular solution coefficients.
         """
+
         self.first_eq = self.general_solution.subs(t, self.t0) - self.x0
         self.second_eq = self.general_solution.subs(t, self.t1) - self.x1
 
@@ -125,12 +129,14 @@ class IsoperimetricSolver(AbstractSolver):
         """
         Substitute particular solution coefficients to general solution.
         """
+
         super()._particular_solution()
 
     def _extrema_value(self):
         """
         Find extrema value for particular solution.
         """
+
         f0_subs = self.f0.subs(
             [(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)]
         )
@@ -142,6 +148,7 @@ class IsoperimetricSolver(AbstractSolver):
         """
         Solve task using all encapsulated methods.
         """
+
         self.__make_lambdas()
         super().solve(verbose=verbose)
 

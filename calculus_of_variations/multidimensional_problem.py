@@ -24,7 +24,7 @@ class MultidimensionalSolver(AbstractSolver):
         x2_1: boundary condition of x2 in t1.
 
     To use:
-        solution = MultidimensionalSolver(L='x1_diff**2 + x2_diff**2', t0=0, t1=1, x1_0=0, x1_1=1, x2_0=0, x2_1=1)
+        solution = MultidimensionalSolver(L="x1_diff**2 + x2_diff**2", t0="0", t1="1", x1_0="0", x1_1="1", x2_0="0", x2_1="1")
         solution.solve(verbose=True)
     """
 
@@ -68,6 +68,7 @@ class MultidimensionalSolver(AbstractSolver):
         """
         Substitutions for finding extrema_value
         """
+
         self.substitutions = [
             (x1_diff, diff(self.particular_solution_1, t)),
             (x2_diff, diff(self.particular_solution_2, t)),
@@ -79,6 +80,7 @@ class MultidimensionalSolver(AbstractSolver):
         """
         Find general solution.
         """
+
         self.L_x1 = diff(self.L, x1)
         self.L_x2 = diff(self.L, x2)
         self.L_x1_diff = diff(self.L, x1_diff)
@@ -138,6 +140,7 @@ class MultidimensionalSolver(AbstractSolver):
         """
         Find particular solution coefficients.
         """
+
         self.first_eq = self.general_solution_1.subs(t, self.t0) - self.x1_0
         self.second_eq = self.general_solution_1.subs(t, self.t1) - self.x1_1
         self.third_eq = self.general_solution_2.subs(t, self.t0) - self.x2_0
@@ -153,6 +156,7 @@ class MultidimensionalSolver(AbstractSolver):
         """
         Substitute particular solution coefficients to general solution.
         """
+
         self.particular_solution_1 = self.general_solution_1.subs(self.coefficients)
         self.particular_solution_2 = self.general_solution_2.subs(self.coefficients)
 
@@ -160,6 +164,7 @@ class MultidimensionalSolver(AbstractSolver):
         """
         Find extrema value for particular solution.
         """
+
         self.__make_substitutions()
 
         extrema_value = integrate(
@@ -171,6 +176,7 @@ class MultidimensionalSolver(AbstractSolver):
         """
         Solve task using all encapsulated methods.
         """
+
         super().solve(verbose=False)
 
         if verbose:

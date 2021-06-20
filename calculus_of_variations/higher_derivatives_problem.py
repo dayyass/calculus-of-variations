@@ -30,11 +30,11 @@ class HigherDerivativesSolver(AbstractSolver):
         t1: Upper limit of the integral.
         x0: Boundary condition in t0.
         x1: Boundary condition in t1.
-        x0_array: Higher order boundary condition in t0 list.
-        x1_array: Higher order boundary condition in t1 list.
+        x0_array: Higher order boundary condition in t0 list (comma separated).
+        x1_array: Higher order boundary condition in t1 list (comma separated).
 
     To use:
-        solution = HigherDerivativesSolver(n=2, L='x_diff_2 ** 2', t0=0, t1=1, x0=0, x1=0, x0_array=[0], x1_array=[1])
+        solution = HigherDerivativesSolver(n="2", L="x_diff_2 ** 2", t0="0", t1="1", x0="0", x1="0", x0_array="0", x1_array="1")
         solution.solve(verbose=True)
     """
 
@@ -82,6 +82,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Init coefficients for general solution
         """
+
         self.Cs = []
         for i in range(1, 2 * self.n + 1):
             self.Cs.append(var("C{}".format(i)))
@@ -90,6 +91,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Init the Euler-Poisson equation
         """
+
         self.equations = [self.first_eq, self.second_eq]
 
         for i in range(1, self.n):
@@ -106,6 +108,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Substitutions for finding extrema_value
         """
+
         self.substitutions = [(x, self.particular_solution)]
         for i in range(1, self.n + 1):
             self.substitutions.append(
@@ -117,6 +120,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Find general solution.
         """
+
         self.L_x = diff(self.L, x)
         self.de = self.L_x
         for i in range(1, self.n + 1):
@@ -129,6 +133,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Find particular solution coefficients.
         """
+
         self.first_eq = self.general_solution.subs(t, self.t0) - self.x0
         self.second_eq = self.general_solution.subs(t, self.t1) - self.x1
 
@@ -142,12 +147,14 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Substitute particular solution coefficients to general solution.
         """
+
         super()._particular_solution()
 
     def _extrema_value(self):
         """
         Find extrema value for particular solution.
         """
+
         self.__make_substitutions()
 
         extrema_value = integrate(
@@ -159,6 +166,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Solve task using all encapsulated methods.
         """
+
         super().solve(verbose=verbose)
 
 

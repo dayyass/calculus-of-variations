@@ -12,6 +12,7 @@ class AbstractSolver(ABC):
         """
         Find general solution.
         """
+
         self.general_solution = None
 
     @abstractmethod
@@ -19,6 +20,7 @@ class AbstractSolver(ABC):
         """
         Find particular solution coefficients.
         """
+
         self.coefficients = None
 
     @abstractmethod
@@ -26,6 +28,7 @@ class AbstractSolver(ABC):
         """
         Substitute particular solution coefficients to general solution.
         """
+
         particular_solution = self.general_solution.subs(self.coefficients)
         self.particular_solution = particular_solution
 
@@ -34,6 +37,7 @@ class AbstractSolver(ABC):
         """
         Find extrema value for particular solution.
         """
+
         self.extrema_value = None
 
     @abstractmethod
@@ -41,6 +45,7 @@ class AbstractSolver(ABC):
         """
         Solve task using all encapsulated methods.
         """
+
         self._general_solution()
         self._coefficients()
         self._particular_solution()

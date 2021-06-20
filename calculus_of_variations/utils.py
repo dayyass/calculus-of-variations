@@ -87,7 +87,7 @@ x2_diff = diff(x2, t)
 
 
 # TODO: ast eval
-def sympy_eval(string) -> Any:
+def sympy_eval(string: str) -> Any:
     """
     Eval string.
     """
