@@ -57,7 +57,7 @@ app.layout = html.Div(
         State("t1", "value"),
     ],
 )
-def update_output(n_clicks, L, l, t0, t1):
+def update_output(n_clicks, L: str, l: str, t0: str, t1: str):
 
     # click "solve"
     if n_clicks is None:
