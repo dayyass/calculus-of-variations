@@ -1,20 +1,12 @@
 import sys
 from argparse import ArgumentParser
 
-from sympy import Function, diff, dsolve, integrate, solve, var
+from sympy import diff, dsolve, integrate, solve, var
 
 # TODO: fix it
 sys.path.append("./")
 from calculus_of_variations.abstract_problem import AbstractSolver
-
-t = var("t")
-x = Function("x")(t)
-x_diff = diff(x, t)
-
-t0 = var("t0")
-t1 = var("t1")
-x_t0 = Function("x")(t0)
-x_t1 = Function("x")(t1)
+from calculus_of_variations.utils import sympy_eval, t, x, x_diff, x_t0, x_t1
 
 
 class BoltzSolver(AbstractSolver):
@@ -29,21 +21,21 @@ class BoltzSolver(AbstractSolver):
         t1: Upper limit of the integral.
 
     To use:
-        solution = BoltzSolver(L='x_diff ** 2 + 2 * x', l='x_t0 ** 2', t0=0, t1=1)
+        solution = BoltzSolver(L="x_diff ** 2 + 2 * x", l="x_t0 ** 2", t0="0", t1="1")
         solution.solve(verbose=True)
     """
 
     C1 = var("C1")
     C2 = var("C2")
 
-    def __init__(self, L: str, l: str, t0: float, t1: float):
+    def __init__(self, L: str, l: str, t0: str, t1: str):
         self._L_str = L
         self._l_str = l
 
-        self.L = eval(L)
-        self.l = eval(l)
-        self.t0 = t0
-        self.t1 = t1
+        self.L = sympy_eval(L)
+        self.l = sympy_eval(l)
+        self.t0 = sympy_eval(t0)
+        self.t1 = sympy_eval(t1)
 
     def __str__(self):
         task = f"integral from {self.t0} to {self.t1} of ({self._L_str})dt + {self._l_str} -> extr\n"
@@ -56,6 +48,7 @@ class BoltzSolver(AbstractSolver):
         """
         Find general solution.
         """
+
         self.L_x_diff = diff(self.L, x_diff)
         self.L_x = diff(self.L, x)
 
@@ -66,6 +59,7 @@ class BoltzSolver(AbstractSolver):
         """
         Find particular solution coefficients.
         """
+
         self.first_eq = (
             self.L_x_diff.subs(
                 [
@@ -96,12 +90,14 @@ class BoltzSolver(AbstractSolver):
         """
         Substitute particular solution coefficients to general solution.
         """
+
         super()._particular_solution()
 
     def _extrema_value(self):
         """
         Find extrema value for particular solution.
         """
+
         L_subs = self.L.subs(
             [(x_diff, diff(self.particular_solution, t)), (x, self.particular_solution)]
         )
@@ -119,19 +115,23 @@ class BoltzSolver(AbstractSolver):
         """
         Solve task using all encapsulated methods.
         """
+
         super().solve(verbose=verbose)
 
 
 if __name__ == "__main__":
+
+    # argparse
     parser = ArgumentParser()
     parser.add_argument("-L", type=str, required=True, help="integrand")
     parser.add_argument("-l", type=str, required=True, help="terminant")
     parser.add_argument(
-        "-t0", type=float, required=True, help="lower limit of the integral"
+        "-t0", type=str, required=True, help="lower limit of the integral"
     )
     parser.add_argument(
-        "-t1", type=float, required=True, help="upper limit of the integral"
+        "-t1", type=str, required=True, help="upper limit of the integral"
     )
     args = parser.parse_args()
 
+    # solve
     BoltzSolver(L=args.L, l=args.l, t0=args.t0, t1=args.t1).solve()

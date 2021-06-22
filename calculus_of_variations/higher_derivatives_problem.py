@@ -1,21 +1,21 @@
 import sys
 from argparse import ArgumentParser
-from typing import List
 
-from sympy import Function, diff, dsolve, integrate, solve, var
+from sympy import diff, dsolve, integrate, solve, var
 
 # TODO: fix it
 sys.path.append("./")
 from calculus_of_variations.abstract_problem import AbstractSolver
-
-t = var("t")
-x = Function("x")(t)
-x_diff = diff(x, t)
-
-# maximum 4 order derivatives
-x_diff_2 = diff(x, t, 2)
-x_diff_3 = diff(x, t, 3)
-x_diff_4 = diff(x, t, 4)
+from calculus_of_variations.utils import (  # noqa: F401
+    sympy_eval,
+    t,
+    x,
+    x_diff,
+    x_diff_2,
+    x_diff_3,
+    x_diff_4,
+    x_diff_5,
+)
 
 
 class HigherDerivativesSolver(AbstractSolver):
@@ -30,35 +30,37 @@ class HigherDerivativesSolver(AbstractSolver):
         t1: Upper limit of the integral.
         x0: Boundary condition in t0.
         x1: Boundary condition in t1.
-        x0_array: Higher order boundary condition in t0 list.
-        x1_array: Higher order boundary condition in t1 list.
+        x0_array: Higher order boundary condition in t0 list (comma separated).
+        x1_array: Higher order boundary condition in t1 list (comma separated).
 
     To use:
-        solution = HigherDerivativesSolver(n=2, L='x_diff_2 ** 2', t0=0, t1=1, x0=0, x1=0, x0_array=[0], x1_array=[1])
+        solution = HigherDerivativesSolver(n="2", L="x_diff_2 ** 2", t0="0", t1="1", x0="0", x1="0", x0_array="0", x1_array="1")
         solution.solve(verbose=True)
     """
 
     def __init__(
         self,
-        n: int,
+        n: str,
         L: str,
-        t0: float,
-        t1: float,
-        x0: float,
-        x1: float,
-        x0_array: List[float],
-        x1_array: List[float],
+        t0: str,
+        t1: str,
+        x0: str,
+        x1: str,
+        x0_array: str,
+        x1_array: str,
     ):
         self._L_str = L
 
-        self.n = n
-        self.L = eval(L)
-        self.t0 = t0
-        self.t1 = t1
-        self.x0 = x0
-        self.x1 = x1
-        self.x0_array = x0_array
-        self.x1_array = x1_array
+        self.n = sympy_eval(n)
+        assert isinstance(self.n, int)
+
+        self.L = sympy_eval(L)
+        self.t0 = sympy_eval(t0)
+        self.t1 = sympy_eval(t1)
+        self.x0 = sympy_eval(x0)
+        self.x1 = sympy_eval(x1)
+        self.x0_array = [sympy_eval(x) for x in x0_array.split(",")]
+        self.x1_array = [sympy_eval(x) for x in x1_array.split(",")]
 
     def __str__(self):
         task = f"integral from {self.t0} to {self.t1} of ({self._L_str})dt -> extr\n"
@@ -80,6 +82,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Init coefficients for general solution
         """
+
         self.Cs = []
         for i in range(1, 2 * self.n + 1):
             self.Cs.append(var("C{}".format(i)))
@@ -88,6 +91,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Init the Euler-Poisson equation
         """
+
         self.equations = [self.first_eq, self.second_eq]
 
         for i in range(1, self.n):
@@ -104,6 +108,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Substitutions for finding extrema_value
         """
+
         self.substitutions = [(x, self.particular_solution)]
         for i in range(1, self.n + 1):
             self.substitutions.append(
@@ -115,6 +120,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Find general solution.
         """
+
         self.L_x = diff(self.L, x)
         self.de = self.L_x
         for i in range(1, self.n + 1):
@@ -127,6 +133,7 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Find particular solution coefficients.
         """
+
         self.first_eq = self.general_solution.subs(t, self.t0) - self.x0
         self.second_eq = self.general_solution.subs(t, self.t1) - self.x1
 
@@ -140,12 +147,14 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Substitute particular solution coefficients to general solution.
         """
+
         super()._particular_solution()
 
     def _extrema_value(self):
         """
         Find extrema value for particular solution.
         """
+
         self.__make_substitutions()
 
         extrema_value = integrate(
@@ -157,41 +166,39 @@ class HigherDerivativesSolver(AbstractSolver):
         """
         Solve task using all encapsulated methods.
         """
+
         super().solve(verbose=verbose)
 
 
 if __name__ == "__main__":
+
+    # argparse
     parser = ArgumentParser()
-    parser.add_argument("-n", type=int, required=True, help="order of differentiation")
+    parser.add_argument("-n", type=str, required=True, help="order of differentiation")
     parser.add_argument("-L", type=str, required=True, help="integrand")
     parser.add_argument(
-        "-t0", type=float, required=True, help="lower limit of the integral"
+        "-t0", type=str, required=True, help="lower limit of the integral"
     )
     parser.add_argument(
-        "-t1", type=float, required=True, help="upper limit of the integral"
+        "-t1", type=str, required=True, help="upper limit of the integral"
     )
-    parser.add_argument(
-        "-x0", type=float, required=True, help="boundary condition in t0"
-    )
-    parser.add_argument(
-        "-x1", type=float, required=True, help="boundary condition in t1"
-    )
+    parser.add_argument("-x0", type=str, required=True, help="boundary condition in t0")
+    parser.add_argument("-x1", type=str, required=True, help="boundary condition in t1")
     parser.add_argument(
         "-x0_array",
-        type=float,
-        nargs="+",
+        type=str,
         required=True,
         help="higher order boundary condition in t0 list",
     )
     parser.add_argument(
         "-x1_array",
-        type=float,
-        nargs="+",
+        type=str,
         required=True,
         help="higher order boundary condition in t1 list",
     )
     args = parser.parse_args()
 
+    # solve
     HigherDerivativesSolver(
         n=args.n,
         L=args.L,

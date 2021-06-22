@@ -1,10 +1,12 @@
+import sys
 import unittest
 
 from parameterized import parameterized_class
-from sympy import I, pi
-from sympy.functions import exp
 
-from calculus_of_variations.multidimensional_problem import MultidimensionalSolver, t
+# TODO: fix it
+sys.path.append("./")
+from calculus_of_variations import MultidimensionalSolver
+from calculus_of_variations.utils import E, I, exp, t
 
 C1 = MultidimensionalSolver.C1
 C2 = MultidimensionalSolver.C2
@@ -12,17 +14,23 @@ C3 = MultidimensionalSolver.C3
 C4 = MultidimensionalSolver.C4
 
 
-def make_solution(
-    L: str, t0: float, t1: float, x1_0: float, x1_1: float, x2_0: float, x2_1: float
-):
-    solution = MultidimensionalSolver(L, t0, t1, x1_0, x1_1, x2_0, x2_1)
+def make_solution(L: str, t0: str, t1: str, x1_0: str, x1_1: str, x2_0: str, x2_1: str):
+    solution = MultidimensionalSolver(
+        L=L, t0=t0, t1=t1, x1_0=x1_0, x1_1=x1_1, x2_0=x2_0, x2_1=x2_1
+    )
     solution.solve(verbose=False)
     return solution
 
 
 test_case_1 = {
     "solution": make_solution(
-        L="x1_diff**2 + x2_diff**2", t0=0, t1=1, x1_0=0, x1_1=1, x2_0=0, x2_1=1
+        L="x1_diff**2 + x2_diff**2",
+        t0="0",
+        t1="1",
+        x1_0="0",
+        x1_1="1",
+        x2_0="0",
+        x2_1="1",
     ),
     "general_solution_1": C1 + C2 * t,
     "general_solution_2": C3 + C4 * t,
@@ -33,24 +41,30 @@ test_case_1 = {
 }
 test_case_2 = {
     "solution": make_solution(
-        L="x1_diff ** 2 + x2_diff ** 2", t0=0, t1=1, x1_0=0, x1_1=1, x2_0=1, x2_1=exp(1)
+        L="x1_diff ** 2 + x2_diff ** 2",
+        t0="0",
+        t1="1",
+        x1_0="0",
+        x1_1="1",
+        x2_0="1",
+        x2_1="E",
     ),
     "general_solution_1": C1 + C2 * t,
     "general_solution_2": C3 + C4 * t,
-    "coefficients": {C1: 0, C2: 1, C3: 1, C4: exp(1) - 1},
+    "coefficients": {C1: 0, C2: 1, C3: 1, C4: E - 1},
     "particular_solution_1": t,
-    "particular_solution_2": t * (exp(1) - 1) + 1,
-    "extrema_value": 1 + (exp(1) - 1) ** 2,
+    "particular_solution_2": t * (E - 1) + 1,
+    "extrema_value": 1 + (E - 1) ** 2,
 }
 test_case_3 = {
     "solution": make_solution(
         L="x2 ** 2 + x1_diff ** 2 + x2_diff ** 2",
-        t0=0,
-        t1=1,
-        x1_0=0,
-        x1_1=1,
-        x2_0=1,
-        x2_1=exp(1),
+        t0="0",
+        t1="1",
+        x1_0="0",
+        x1_1="1",
+        x2_0="1",
+        x2_1="E",
     ),
     "general_solution_1": C1 + C2 * t,
     "general_solution_2": C3 * exp(-t) + C4 * exp(t),
@@ -61,7 +75,13 @@ test_case_3 = {
 }
 test_case_4 = {
     "solution": make_solution(
-        L="x1_diff * x2_diff - x1 * x2", t0=0, t1=pi / 2, x1_0=0, x1_1=1, x2_0=1, x2_1=0
+        L="x1_diff * x2_diff - x1 * x2",
+        t0="0",
+        t1="pi / 2",
+        x1_0="0",
+        x1_1="1",
+        x2_0="1",
+        x2_1="0",
     ),
     "general_solution_1": 2 * I * C1 * exp(I * t) + 2 * I * C2 * exp(-I * t),
     "general_solution_2": C3 * exp(I * t) + C4 * exp(-I * t),
@@ -73,12 +93,12 @@ test_case_4 = {
 test_case_5 = {
     "solution": make_solution(
         L="2 * x1 + x2 ** 2 + x1_diff ** 2 + x2_diff ** 2",
-        t0=0,
-        t1=1,
-        x1_0=0,
-        x1_1=0.5,
-        x2_0=1,
-        x2_1=exp(-1),
+        t0="0",
+        t1="1",
+        x1_0="0",
+        x1_1="0.5",
+        x2_0="1",
+        x2_1="exp(-1)",
     ),
     "general_solution_1": C1 + C2 * t + t ** 2 / 2,
     "general_solution_2": C3 * exp(-t) + C4 * exp(t),

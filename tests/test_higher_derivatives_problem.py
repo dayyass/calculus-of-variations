@@ -1,10 +1,12 @@
+import sys
 import unittest
-from typing import List
 
 from parameterized import parameterized_class
-from sympy import var
 
-from calculus_of_variations.higher_derivatives_problem import HigherDerivativesSolver, t
+# TODO: fix it
+sys.path.append("./")
+from calculus_of_variations import HigherDerivativesSolver
+from calculus_of_variations.utils import t, var
 
 Cs = {}
 for i in range(1, 9):
@@ -12,23 +14,25 @@ for i in range(1, 9):
 
 
 def make_solution(
-    n: int,
-    L: str,
-    t0: float,
-    t1: float,
-    x0: float,
-    x1: float,
-    x0_array: List[float],
-    x1_array: List[float],
+    n: str, L: str, t0: str, t1: str, x0: str, x1: str, x0_array: str, x1_array: str
 ):
-    solution = HigherDerivativesSolver(n, L, t0, t1, x0, x1, x0_array, x1_array)
+    solution = HigherDerivativesSolver(
+        n=n, L=L, t0=t0, t1=t1, x0=x0, x1=x1, x0_array=x0_array, x1_array=x1_array
+    )
     solution.solve(verbose=False)
     return solution
 
 
 test_case_1 = {
     "solution": make_solution(
-        n=2, L="x_diff_2 ** 2", t0=0, t1=1, x0=0, x1=0, x0_array=[0], x1_array=[1]
+        n="2",
+        L="x_diff_2 ** 2",
+        t0="0",
+        t1="1",
+        x0="0",
+        x1="0",
+        x0_array="0",
+        x1_array="1",
     ),
     "general_solution": Cs[1] + Cs[2] * t + Cs[3] * t ** 2 + Cs[4] * t ** 3,
     "coefficients": {Cs[1]: 0, Cs[2]: 0, Cs[3]: -1, Cs[4]: 1},
@@ -37,14 +41,14 @@ test_case_1 = {
 }
 test_case_2 = {
     "solution": make_solution(
-        n=2,
+        n="2",
         L="x_diff_2 ** 2 - 48 * x",
-        t0=0,
-        t1=1,
-        x0=1,
-        x1=0,
-        x0_array=[-4],
-        x1_array=[0],
+        t0="0",
+        t1="1",
+        x0="1",
+        x1="0",
+        x0_array="-4",
+        x1_array="0",
     ),
     "general_solution": Cs[1] + Cs[2] * t + Cs[3] * t ** 2 + Cs[4] * t ** 3 + t ** 4,
     "coefficients": {Cs[1]: 1, Cs[2]: -4, Cs[3]: 6, Cs[4]: -4},
@@ -53,7 +57,14 @@ test_case_2 = {
 }
 test_case_3 = {
     "solution": make_solution(
-        n=3, L="x_diff_3 ** 2", t0=0, t1=1, x0=0, x1=1, x0_array=[0, 0], x1_array=[3, 6]
+        n="3",
+        L="x_diff_3 ** 2",
+        t0="0",
+        t1="1",
+        x0="0",
+        x1="1",
+        x0_array="0, 0",
+        x1_array="3, 6",
     ),
     "general_solution": Cs[1]
     + Cs[2] * t
@@ -67,14 +78,14 @@ test_case_3 = {
 }
 test_case_4 = {
     "solution": make_solution(
-        n=4,
+        n="4",
         L="x_diff_4 ** 2",
-        t0=0,
-        t1=1,
-        x0=0,
-        x1=1,
-        x0_array=[0, 0, 0],
-        x1_array=[3, 6, 10],
+        t0="0",
+        t1="1",
+        x0="0",
+        x1="1",
+        x0_array="0, 0, 0",
+        x1_array="3, 6, 10",
     ),
     "general_solution": Cs[1]
     + Cs[2] * t
