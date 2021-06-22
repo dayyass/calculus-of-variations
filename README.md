@@ -98,7 +98,7 @@ List of **allowed functions** that you can use ass parameters: [*link*](https://
 
 ### Web-interface
 The project supports simple web-interface for solving problems.
-You can specify *host* (*--host*) and *port* (*--port*) (default values: `host: 127.0.0.1` and `port: 8050`):
+You can specify **host** (`--host`) and **port** (`--port`) (default values: `host: 127.0.0.1` and `port: 8050`):
 ```
 # Simplest problem
 python web_interface/simplest_problem_dash.py --host "127.0.0.1" --port 8050
