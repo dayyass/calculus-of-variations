@@ -2,9 +2,9 @@ import sys
 
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output, State
 
 import dash
-from dash.dependencies import Input, Output, State
 
 # TODO: fix it
 sys.path.append("./")
