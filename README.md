@@ -14,7 +14,7 @@ I [*participated*](https://it-mm.rea.ru/uploads/arhiv/2019/sertificat/299.pdf) w
 My [*presentation*](presentation.pdf) about this project.
 
 ### What is Calculus of variations
-According to Wikipedia ([*link*](https://en.wikipedia.org/wiki/Calculus_of_variations)):<br>
+According to [Wikipedia](https://en.wikipedia.org/wiki/Calculus_of_variations):<br>
 The **calculus of variations** is a field of mathematical analysis that uses variations, which are small changes in functions and functionals, to find maxima and minima of functionals: mappings from a set of functions to the real numbers. Functionals are often expressed as definite integrals involving functions and their derivatives. Functions that maximize or minimize functionals may be found using the Euler–Lagrange equation of the calculus of variations.<br>
 
 ### Simplest problem
@@ -94,6 +94,7 @@ python calculus_of_variations/multidimensional_problem.py -L {str} -t0 {str} -t1
 ```
 
 For specific examples see [**examples.sh**](examples.sh).
+List of [*allowed functions*](https://github.com/dayyass/calculus_of_variations/wiki/Allowed-functions) that you can use ass parameters.
 
 ### Web-interface
 The project supports simple web-interface for solving problems.
