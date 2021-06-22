@@ -93,8 +93,8 @@ python calculus_of_variations/higher_derivatives_problem.py -n {str} -L {str} -t
 python calculus_of_variations/multidimensional_problem.py -L {str} -t0 {str} -t1 {str} -x1_0 {str} -x1_1 {str} -x2_0 {str} -x2_1 {str}
 ```
 
-For specific examples see [**examples.sh**](examples.sh).
-List of [*allowed functions*](https://github.com/dayyass/calculus_of_variations/wiki/Allowed-functions) that you can use ass parameters.
+For specific examples see [**examples.sh**](examples.sh).<br>
+List of **allowed functions** that you can use ass parameters: [*link*](https://github.com/dayyass/calculus_of_variations/wiki/Allowed-functions).
 
 ### Web-interface
 The project supports simple web-interface for solving problems.
