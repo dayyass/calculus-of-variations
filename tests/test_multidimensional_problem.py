@@ -6,7 +6,7 @@ from parameterized import parameterized_class
 # TODO: fix it
 sys.path.append("./")
 from calculus_of_variations import MultidimensionalSolver
-from calculus_of_variations.utils import I, exp, t
+from calculus_of_variations.utils import E, I, exp, t
 
 C1 = MultidimensionalSolver.C1
 C2 = MultidimensionalSolver.C2
@@ -51,10 +51,10 @@ test_case_2 = {
     ),
     "general_solution_1": C1 + C2 * t,
     "general_solution_2": C3 + C4 * t,
-    "coefficients": {C1: 0, C2: 1, C3: 1, C4: exp(1) - 1},
+    "coefficients": {C1: 0, C2: 1, C3: 1, C4: E - 1},
     "particular_solution_1": t,
-    "particular_solution_2": t * (exp(1) - 1) + 1,
-    "extrema_value": 1 + (exp(1) - 1) ** 2,
+    "particular_solution_2": t * (E - 1) + 1,
+    "extrema_value": 1 + (E - 1) ** 2,
 }
 test_case_3 = {
     "solution": make_solution(

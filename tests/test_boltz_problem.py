@@ -46,7 +46,7 @@ test_case_4 = {
         L="2 * (t * x_diff ** 2 + x_diff * x)",
         l="3 * x_t0 ** 2 - x_t1 ** 2 - 4 * x_t1",
         t0="1",
-        t1="exp(1)",
+        t1="E",
     ),
     "general_solution": C1 + C2 * log(t),
     "coefficients": {C1: 1, C2: 1},

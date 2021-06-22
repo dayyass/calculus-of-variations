@@ -33,7 +33,7 @@ test_case_2 = {
     "extrema_value": -1 / 180,
 }
 test_case_3 = {
-    "solution": make_solution(L="t * x_diff ** 2", t0="1", t1="exp(1)", x0="0", x1="1"),
+    "solution": make_solution(L="t * x_diff ** 2", t0="1", t1="E", x0="0", x1="1"),
     "general_solution": C1 + C2 * log(t),
     "coefficients": {C1: 0, C2: 1},
     "particular_solution": log(t),
