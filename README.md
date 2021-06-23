@@ -94,7 +94,7 @@ python calculus_of_variations/multidimensional_problem.py -L {str} -t0 {str} -t1
 ```
 
 For specific examples see [**examples.sh**](examples.sh).<br>
-List of **allowed functions** that you can use ass parameters: [*link*](https://github.com/dayyass/calculus_of_variations/wiki/Allowed-functions).
+List of **allowed functions** that you can use as parameters: [*link*](https://github.com/dayyass/calculus_of_variations/wiki/Allowed-functions).
 
 ### Web-interface
 The project supports simple web-interface for solving problems.
@@ -131,7 +131,6 @@ To start docker container run (example for **simplest_problem_dash**):
 docker run -d -p 8050:8050 --name calculus_of_variations calculus_of_variations python web_interface/simplest_problem_dash.py --host 0.0.0.0 --port 8050
 ```
 To access web-interface go to `http://localhost:8050`
-```
 
 ### Tests
 To launch [**tests**](tests) run one of the following commands:<br>
