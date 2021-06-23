@@ -130,9 +130,7 @@ To start docker container run (example for **simplest_problem_dash**):
 ```
 docker run -d -p 8050:8050 --name calculus_of_variations calculus_of_variations python web_interface/simplest_problem_dash.py --host 0.0.0.0 --port 8050
 ```
-To access web-interface go to:
-```
-http://localhost:8050
+To access web-interface go to `http://localhost:8050`
 ```
 
 ### Tests
