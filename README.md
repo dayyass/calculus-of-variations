@@ -116,6 +116,25 @@ python web_interface/higher_derivatives_problem_dash.py --host "127.0.0.1" --por
 python web_interface/multidimensional_problem_dash.py --host "127.0.0.1" --port 8050
 ```
 
+You can also launch web-interface using docker.<br>
+To build docker image run:
+```
+docker build -t calculus_of_variations .
+```
+You can also pull image from [Docker Hub](https://hub.docker.com/r/dayyass/calculus_of_variations):
+```
+docker pull dayyass/calculus_of_variations
+```
+
+To start docker container run (example for **simplest_problem_dash**):
+```
+docker run -d -p 8050:8050 --name calculus_of_variations calculus_of_variations python web_interface/simplest_problem_dash.py --host 0.0.0.0 --port 8050
+```
+To access web-interface go to:
+```
+http://localhost:8050
+```
+
 ### Tests
 To launch [**tests**](tests) run one of the following commands:<br>
 `pytest` or `python -m unittest discover`
