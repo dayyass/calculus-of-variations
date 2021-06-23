@@ -93,12 +93,12 @@ python calculus_of_variations/higher_derivatives_problem.py -n {str} -L {str} -t
 python calculus_of_variations/multidimensional_problem.py -L {str} -t0 {str} -t1 {str} -x1_0 {str} -x1_1 {str} -x2_0 {str} -x2_1 {str}
 ```
 
-For specific examples see [**examples.sh**](examples.sh).
-List of [*allowed functions*](https://github.com/dayyass/calculus_of_variations/wiki/Allowed-functions) that you can use ass parameters.
+For specific examples see [**examples.sh**](examples.sh).<br>
+List of **allowed functions** that you can use ass parameters: [*link*](https://github.com/dayyass/calculus_of_variations/wiki/Allowed-functions).
 
 ### Web-interface
 The project supports simple web-interface for solving problems.
-You can specify *host* (*--host*) and *port* (*--port*) (default values: `host: 127.0.0.1` and `port: 8050`):
+You can specify **host** (`--host`) and **port** (`--port`) (default values: `host: 127.0.0.1` and `port: 8050`):
 ```
 # Simplest problem
 python web_interface/simplest_problem_dash.py --host "127.0.0.1" --port 8050
@@ -114,6 +114,23 @@ python web_interface/higher_derivatives_problem_dash.py --host "127.0.0.1" --por
 
 # Multidimensional problem
 python web_interface/multidimensional_problem_dash.py --host "127.0.0.1" --port 8050
+```
+
+You can also launch web-interface using docker.<br>
+To build docker image run:
+```
+docker build -t calculus_of_variations .
+```
+You can also pull image from [Docker Hub](https://hub.docker.com/r/dayyass/calculus_of_variations):
+```
+docker pull dayyass/calculus_of_variations
+```
+
+To start docker container run (example for **simplest_problem_dash**):
+```
+docker run -d -p 8050:8050 --name calculus_of_variations calculus_of_variations python web_interface/simplest_problem_dash.py --host 0.0.0.0 --port 8050
+```
+To access web-interface go to `http://localhost:8050`
 ```
 
 ### Tests
