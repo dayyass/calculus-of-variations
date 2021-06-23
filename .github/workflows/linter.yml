@@ -22,9 +22,9 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install isort black flake8 types-PyYAML mypy
-#    - name: Code format check with isort
-#      run: |
-#        isort --check-only --profile black .
+    - name: Code format check with isort
+      run: |
+        isort --check-only --profile black .
     - name: Code format check with black
       run: |
         black --check .
