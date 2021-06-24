@@ -1,9 +1,9 @@
 [![tests](https://github.com/dayyass/calculus_of_variations/actions/workflows/tests.yml/badge.svg)](https://github.com/dayyass/calculus_of_variations/actions/workflows/tests.yml)
 [![linter](https://github.com/dayyass/calculus_of_variations/actions/workflows/linter.yml/badge.svg)](https://github.com/dayyass/calculus_of_variations/actions/workflows/linter.yml)
 [![codecov](https://codecov.io/gh/dayyass/calculus_of_variations/branch/master/graph/badge.svg?token=H8OFWPPUOY)](https://codecov.io/gh/dayyass/calculus_of_variations)
-[![license](https://img.shields.io/github/license/dayyass/calculus_of_variations)](LICENSE)
+[![license](https://img.shields.io/github/license/dayyass/calculus_of_variations)](https://github.com/dayyass/calculus_of_variations/blob/master/LICENSE)
 [![release (latest by date)](https://img.shields.io/github/v/release/dayyass/calculus_of_variations)](https://github.com/dayyass/calculus_of_variations/releases/latest)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](.pre-commit-config.yaml)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/dayyass/calculus_of_variations/blob/master/.pre-commit-config.yaml)
 [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ### About
@@ -93,7 +93,7 @@ python calculus_of_variations/higher_derivatives_problem.py -n {str} -L {str} -t
 python calculus_of_variations/multidimensional_problem.py -L {str} -t0 {str} -t1 {str} -x1_0 {str} -x1_1 {str} -x2_0 {str} -x2_1 {str}
 ```
 
-For specific examples see [**examples.sh**](examples.sh).<br>
+For specific examples see [**examples.sh**](https://github.com/dayyass/calculus_of_variations/blob/master/examples.sh).<br>
 List of **allowed functions** that you can use as parameters: [*link*](https://github.com/dayyass/calculus_of_variations/wiki/Allowed-functions).
 
 ### Web-interface
@@ -133,7 +133,7 @@ docker run -d -p 8050:8050 --name calculus_of_variations calculus_of_variations 
 To access web-interface go to `http://localhost:8050`
 
 ### Tests
-To launch [**tests**](tests) run one of the following commands:<br>
+To launch [**tests**](https://github.com/dayyass/calculus_of_variations/tree/master/tests) run one of the following commands:<br>
 `pytest` or `python -m unittest discover`
 
 To use [**pre-commit**](https://pre-commit.com) hooks run:<br>
