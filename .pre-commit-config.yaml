@@ -15,6 +15,7 @@ repos:
     - id: name-tests-test
       args: ['--django']
     - id: debug-statements
+    - id: end-of-file-fixer
     - id: trailing-whitespace
     - id: check-docstring-first
     - id: requirements-txt-fixer
