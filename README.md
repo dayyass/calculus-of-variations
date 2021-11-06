@@ -192,7 +192,7 @@ To measure [**code coverage**](https://coverage.readthedocs.io) run the followin
 `coverage run -m unittest discover && coverage report -m`
 
 ## Requirements
-Python >= 3.6
+Python >= 3.6<br>
 sympy == 1.6.2
 
 ### Citation
