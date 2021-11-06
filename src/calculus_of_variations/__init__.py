@@ -4,6 +4,8 @@ from .isoperimetric_problem import IsoperimetricSolver
 from .multidimensional_problem import MultidimensionalSolver
 from .simplest_problem import SimplestSolver
 
+__version__ = "0.3.0"
+
 __all__ = [
     "SimplestSolver",
     "BoltzSolver",
