@@ -5,7 +5,7 @@ coverage:
 docker_build:
 	docker image build -t calculus_of_variations .
 docker_run:
-	docker container run -it calculus_of_variations
+	docker container run -it -p 8050:8050 calculus_of_variations
 pypi_packages:
 	pip install --upgrade build twine
 pypi_build:
