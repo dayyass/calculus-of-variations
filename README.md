@@ -57,13 +57,13 @@ Functions that maximize or minimize functionals may be found using the [*Eulerâ€
 Arbitrary constants arising when solving this differential equation, find them from the given boundary conditions.
 
 ### List of supported problems
-- [x] [*Simplest problem*](https://github.com/dayyass/calculus_of_variations/wiki/Simplest-problem)
-- [x] [*Boltz problem*](https://github.com/dayyass/calculus_of_variations/wiki/Boltz-problem)
-- [x] [*Isoperimetric problem*](https://github.com/dayyass/calculus_of_variations/wiki/Isoperimetric-problem)
-- [x] [*Higher derivatives problem*](https://github.com/dayyass/calculus_of_variations/wiki/Higher-derivatives-problem)
-- [x] [*Multidimensional problem*](https://github.com/dayyass/calculus_of_variations/wiki/Multidimensional-problem)
+- [x] [*Simplest problem*](https://github.com/dayyass/calculus-of-variations/wiki/Simplest-problem)
+- [x] [*Boltz problem*](https://github.com/dayyass/calculus-of-variations/wiki/Boltz-problem)
+- [x] [*Isoperimetric problem*](https://github.com/dayyass/calculus-of-variations/wiki/Isoperimetric-problem)
+- [x] [*Higher derivatives problem*](https://github.com/dayyass/calculus-of-variations/wiki/Higher-derivatives-problem)
+- [x] [*Multidimensional problem*](https://github.com/dayyass/calculus-of-variations/wiki/Multidimensional-problem)
 
-More about each task in [*project wiki*](https://github.com/dayyass/calculus_of_variations/wiki).
+More about each task in [*project wiki*](https://github.com/dayyass/calculus-of-variations/wiki).
 
 ### Usage
 First, install the package:
@@ -76,21 +76,21 @@ Usage for example above:
 import calculus_of_variations
 
 solver = calculus_of_variations.SimplestSolver(
-    L="x_diff ** 2",
+    L="x_diff ** 2 + t * x",
     t0="0", t1="1",
-    x0="0", x1="1",
+    x0="0", x1="0",
 )
 
 solver.solve()
 
-# integral from 0 to 1 of (x_diff ** 2)dt -> extr
+# integral from 0 to 1 of (x_diff ** 2 + t * x)dt -> extr
 # x(0) = 0
-# x(1) = 1
+# x(1) = 0
 
-# general_solution: C1 + C2*t
-# coefficients: {C1: 0, C2: 1}
-# particular_solution: t
-# extrema_value: 1
+# general_solution: C1 + C2*t + t**3/12
+# coefficients: {C1: 0, C2: -1/12}
+# particular_solution: t**3/12 - t/12
+# extrema_value: -1/180
 ```
 
 Other cases:
@@ -142,8 +142,8 @@ solver = calculus_of_variations.MultidimensionalSolver(
 solver.solve()
 ```
 
-For specific examples see [**examples.sh**](https://github.com/dayyass/calculus_of_variations/blob/master/examples.sh).<br>
-List of **allowed functions** that you can use as parameters: [*link*](https://github.com/dayyass/calculus_of_variations/wiki/Allowed-functions).
+For specific examples see [**examples.sh**](https://github.com/dayyass/calculus-of-variations/blob/master/examples.sh).<br>
+List of **allowed functions** that you can use as parameters: [*link*](https://github.com/dayyass/calculus-of-variations/wiki/Allowed-functions).
 
 ### Web-interface
 The project supports simple web-interface for solving problems.
@@ -182,7 +182,7 @@ docker container run -d -p 8050:8050 --name calculus_of_variations calculus_of_v
 To access web-interface go to `http://localhost:8050`
 
 ### Tests
-To launch [**tests**](https://github.com/dayyass/calculus_of_variations/tree/master/tests) run the following commands:<br>
+To launch [**tests**](https://github.com/dayyass/calculus-of-variations/tree/master/tests) run the following commands:<br>
 `python -m unittest discover`
 
 To use [**pre-commit**](https://pre-commit.com) hooks run:<br>
@@ -195,12 +195,12 @@ To measure [**code coverage**](https://coverage.readthedocs.io) run the followin
 Python >= 3.6
 
 ### Citation
-If you use **calculus_of_variations** in a scientific publication, we would appreciate references to the following BibTex entry:
+If you use **calculus-of-variations** in a scientific publication, we would appreciate references to the following BibTex entry:
 ```bibtex
 @misc{dayyass2018variations,
     author       = {El-Ayyass, Dani},
     title        = {Calculus of Variations problems solving using symbolic mathematics},
-    howpublished = {\url{https://github.com/dayyass/calculus_of_variations}},
+    howpublished = {\url{https://github.com/dayyass/calculus-of-variations}},
     year         = {2018}
 }
 ```
