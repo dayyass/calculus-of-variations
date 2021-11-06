@@ -1,39 +1,4 @@
-appdirs==1.4.4
-attrs==21.2.0
-Brotli==1.0.9
-cfgv==3.2.0
-click==7.1.2
-coverage==5.5
+coverage==5.5  # dev
 dash==1.17.0
-dash-core-components==1.13.0
-dash-html-components==1.1.1
-dash-renderer==1.8.3
-dash-table==4.11.0
-distlib==0.3.1
-filelock==3.0.12
-Flask==1.1.2
-Flask-Compress==1.8.0
-future==0.18.2
-identify==1.5.10
-iniconfig==1.1.1
-itsdangerous==1.1.0
-Jinja2==2.11.3
-MarkupSafe==1.1.1
-mpmath==1.1.0
-nodeenv==1.5.0
-packaging==20.9
-parameterized==0.7.4
-plotly==4.12.0
-pluggy==0.13.1
-pre-commit==2.9.3
-py==1.10.0
-pyparsing==2.4.7
-pytest==6.2.4
-pytest-cov==2.12.1
-PyYAML==5.4
-retrying==1.3.3
-six==1.15.0
-sympy==1.6.2
-toml==0.10.2
-virtualenv==20.2.2
-Werkzeug==1.0.1
+parameterized==0.7.4  # dev
+pre-commit==2.9.3  # dev
