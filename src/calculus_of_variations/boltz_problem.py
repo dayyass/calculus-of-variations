@@ -1,12 +1,9 @@
-import sys
 from argparse import ArgumentParser
 
 from sympy import diff, dsolve, integrate, solve, var
 
-# TODO: fix it
-sys.path.append("./")
-from src.calculus_of_variations.abstract_problem import AbstractSolver
-from src.calculus_of_variations.utils import sympy_eval, t, x, x_diff, x_t0, x_t1
+from .abstract_problem import AbstractSolver
+from .utils import sympy_eval, t, x, x_diff, x_t0, x_t1
 
 
 class BoltzSolver(AbstractSolver):

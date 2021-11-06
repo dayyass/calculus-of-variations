@@ -1,4 +1,3 @@
-import sys
 from argparse import ArgumentParser
 from typing import Dict, Union
 
@@ -6,8 +5,6 @@ import dash_core_components as dcc
 import dash_html_components as html
 from sympy.core.symbol import Symbol
 
-# TODO: fix it
-sys.path.append("./")
 from src.calculus_of_variations import (
     BoltzSolver,
     HigherDerivativesSolver,

@@ -1,10 +1,7 @@
-import sys
 import unittest
 
 from parameterized import parameterized_class
 
-# TODO: fix it
-sys.path.append("./")
 from src.calculus_of_variations import MultidimensionalSolver
 from src.calculus_of_variations.utils import E, I, exp, t
 
