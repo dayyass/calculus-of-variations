@@ -3,9 +3,9 @@ all:
 coverage:
 	coverage run -m unittest discover && coverage report -m
 docker_build:
-	docker image build -t calculus-of-variations .
+	docker image build -t calculus_of_variations .
 docker_run:
-	docker container run -it calculus-of-variations
+	docker container run -it calculus_of_variations
 pypi_packages:
 	pip install --upgrade build twine
 pypi_build:
