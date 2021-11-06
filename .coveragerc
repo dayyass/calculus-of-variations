@@ -4,8 +4,12 @@ source = calculus_of_variations
 
 [report]
 exclude_lines =
-    if self.debug:
     pragma: no cover
+    if self\.debug
+    raise AssertionError
     raise NotImplementedError
     if __name__ == .__main__.:
+    ...
+
+show_missing = True
 ignore_errors = False
