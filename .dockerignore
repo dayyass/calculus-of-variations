@@ -17,6 +17,6 @@ venv
 dist
 .git
 
-src/muse_as_service.egg-info/
+src/calculus_of_variations.egg-info/
 
 **presentation.pdf
