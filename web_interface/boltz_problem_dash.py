@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import BoltzSolver
+from src.calculus_of_variations import BoltzSolver
 from web_interface.utils import dash_answer, dash_boltz_problem, get_argparse
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]

@@ -5,8 +5,8 @@ from parameterized import parameterized_class
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import MultidimensionalSolver
-from calculus_of_variations.utils import E, I, exp, t
+from src.calculus_of_variations import MultidimensionalSolver
+from src.calculus_of_variations.utils import E, I, exp, t
 
 C1 = MultidimensionalSolver.C1
 C2 = MultidimensionalSolver.C2

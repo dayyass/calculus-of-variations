@@ -8,7 +8,7 @@ from sympy.core.symbol import Symbol
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import (
+from src.calculus_of_variations import (
     BoltzSolver,
     HigherDerivativesSolver,
     IsoperimetricSolver,

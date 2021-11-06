@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import HigherDerivativesSolver
+from src.calculus_of_variations import HigherDerivativesSolver
 from web_interface.utils import (
     dash_answer,
     dash_higher_derivatives_problem,

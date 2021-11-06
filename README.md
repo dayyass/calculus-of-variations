@@ -133,14 +133,14 @@ docker run -d -p 8050:8050 --name calculus_of_variations calculus_of_variations 
 To access web-interface go to `http://localhost:8050`
 
 ### Tests
-To launch [**tests**](https://github.com/dayyass/calculus_of_variations/tree/master/tests) run one of the following commands:<br>
-`pytest` or `python -m unittest discover`
+To launch [**tests**](https://github.com/dayyass/calculus_of_variations/tree/master/tests) run the following commands:<br>
+`python -m unittest discover`
 
 To use [**pre-commit**](https://pre-commit.com) hooks run:<br>
 `pre-commit install`
 
-To measure [**code coverage**](https://coverage.readthedocs.io) run one of the following commands:<br>
-`coverage run -m pytest && coverage report -m` or `coverage run -m unittest discover && coverage report -m`
+To measure [**code coverage**](https://coverage.readthedocs.io) run the following commands:<br>
+`coverage run -m unittest discover && coverage report -m`
 
 ### Citation
 If you use **calculus_of_variations** in a scientific publication, we would appreciate references to the following BibTex entry:

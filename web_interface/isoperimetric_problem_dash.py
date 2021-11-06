@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import IsoperimetricSolver
+from src.calculus_of_variations import IsoperimetricSolver
 from web_interface.utils import dash_answer, dash_isoperimetric_problem, get_argparse
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]

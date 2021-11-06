@@ -5,8 +5,8 @@ from parameterized import parameterized_class
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import HigherDerivativesSolver
-from calculus_of_variations.utils import t, var
+from src.calculus_of_variations import HigherDerivativesSolver
+from src.calculus_of_variations.utils import t, var
 
 Cs = {}
 for i in range(1, 9):

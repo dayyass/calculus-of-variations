@@ -5,8 +5,8 @@ from parameterized import parameterized_class
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import IsoperimetricSolver
-from calculus_of_variations.utils import cos, pi, t, var
+from src.calculus_of_variations import IsoperimetricSolver
+from src.calculus_of_variations.utils import cos, pi, t, var
 
 C1 = IsoperimetricSolver.C1
 C2 = IsoperimetricSolver.C2

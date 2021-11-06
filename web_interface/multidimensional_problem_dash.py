@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations import MultidimensionalSolver
+from src.calculus_of_variations import MultidimensionalSolver
 from web_interface.utils import (
     dash_multidimensional_answer,
     dash_multidimensional_problem,
