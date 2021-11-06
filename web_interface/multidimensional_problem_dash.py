@@ -1,14 +1,11 @@
-import sys
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
-# TODO: fix it
-sys.path.append("./")
 from src.calculus_of_variations import MultidimensionalSolver
-from web_interface.utils import (
+
+from .utils import (
     dash_multidimensional_answer,
     dash_multidimensional_problem,
     get_argparse,
