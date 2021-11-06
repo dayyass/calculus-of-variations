@@ -192,8 +192,7 @@ To measure [**code coverage**](https://coverage.readthedocs.io) run the followin
 `coverage run -m unittest discover && coverage report -m`
 
 ## Requirements
-Python >= 3.6<br>
-sympy == 1.6.2
+Python >= 3.6
 
 ### Citation
 If you use **calculus_of_variations** in a scientific publication, we would appreciate references to the following BibTex entry:
