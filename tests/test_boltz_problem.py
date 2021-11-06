@@ -1,12 +1,9 @@
-import sys
 import unittest
 
 from parameterized import parameterized_class
 
-# TODO: fix it
-sys.path.append("./")
-from calculus_of_variations import BoltzSolver
-from calculus_of_variations.utils import log, t
+from src.calculus_of_variations import BoltzSolver
+from src.calculus_of_variations.utils import log, t
 
 C1 = BoltzSolver.C1
 C2 = BoltzSolver.C2

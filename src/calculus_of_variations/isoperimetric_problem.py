@@ -1,12 +1,9 @@
-import sys
 from argparse import ArgumentParser
 
 from sympy import diff, dsolve, integrate, solve, var
 
-# TODO: fix it
-sys.path.append("./")
-from calculus_of_variations.abstract_problem import AbstractSolver
-from calculus_of_variations.utils import sympy_eval, t, x, x_diff
+from .abstract_problem import AbstractSolver
+from .utils import sympy_eval, t, x, x_diff
 
 
 class IsoperimetricSolver(AbstractSolver):

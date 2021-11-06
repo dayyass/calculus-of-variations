@@ -1,12 +1,22 @@
 **.DS_Store
-**__pycache__/
-**.cache/
-**.pyc
-**.mypy_cache/
-**.pytest_cache/
+**.python-version
+**.ipynb
+**.ipynb_checkpoints
+
+# cache
+**__pycache__
+**.mypy_cache
+**.cache
+
+# coverage
 **.coverage
 **coverage.xml
-**presentation.pdf
-/venv/
+
+venv
 .idea
+dist
 .git
+
+src/calculus_of_variations.egg-info/
+
+**presentation.pdf

@@ -1,6 +1,7 @@
-FROM python:3.9.5-slim-buster
+FROM python:3.7-slim-buster
 MAINTAINER Dani El-Ayyass <dayyass@yandex.ru>
-WORKDIR /app
+
+WORKDIR /workdir
 COPY . .
 
 # instal dependencies
