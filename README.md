@@ -16,9 +16,9 @@
 ### About
 My bachelor project on solving the **Calculus of variations** problems using symbolic mathematics (2018).
 
-I [*participated*](https://it-mm.rea.ru/uploads/arhiv/2019/sertificat/299.pdf) with this project at the IX International Scientific and Practical Conference named after A.I. Kitov "Information Technologies and Mathematical Methods in Economics and Management" ([*link*](https://it-mm.rea.ru/eng)).<br>
+I [participated](https://it-mm.rea.ru/uploads/arhiv/2019/sertificat/299.pdf) with this project at the IX International Scientific and Practical Conference named after A.I. Kitov "Information Technologies and Mathematical Methods in Economics and Management" ([link](https://it-mm.rea.ru/eng)).<br>
 
-My [*presentation*](presentation.pdf) about this project.
+My [presentation](presentation.pdf) about this project.
 
 ### What is Calculus of variations
 According to [Wikipedia](https://en.wikipedia.org/wiki/Calculus_of_variations):<br>
@@ -57,13 +57,13 @@ Functions that maximize or minimize functionals may be found using the [*Eulerâ€
 Arbitrary constants arising when solving this differential equation, find them from the given boundary conditions.
 
 ### List of supported problems
-- [x] [*Simplest problem*](https://github.com/dayyass/calculus-of-variations/wiki/Simplest-problem)
-- [x] [*Boltz problem*](https://github.com/dayyass/calculus-of-variations/wiki/Boltz-problem)
-- [x] [*Isoperimetric problem*](https://github.com/dayyass/calculus-of-variations/wiki/Isoperimetric-problem)
-- [x] [*Higher derivatives problem*](https://github.com/dayyass/calculus-of-variations/wiki/Higher-derivatives-problem)
-- [x] [*Multidimensional problem*](https://github.com/dayyass/calculus-of-variations/wiki/Multidimensional-problem)
+- [Simplest problem](https://github.com/dayyass/calculus-of-variations/wiki/Simplest-problem)
+- [Boltz problem](https://github.com/dayyass/calculus-of-variations/wiki/Boltz-problem)
+- [Isoperimetric problem](https://github.com/dayyass/calculus-of-variations/wiki/Isoperimetric-problem)
+- [Higher derivatives problem](https://github.com/dayyass/calculus-of-variations/wiki/Higher-derivatives-problem)
+- [Multidimensional problem](https://github.com/dayyass/calculus-of-variations/wiki/Multidimensional-problem)
 
-More about each task in [*project wiki*](https://github.com/dayyass/calculus-of-variations/wiki).
+More about each task in [project wiki](https://github.com/dayyass/calculus-of-variations/wiki).
 
 ### Usage
 First, install the package:
