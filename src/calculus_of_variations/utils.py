@@ -86,7 +86,6 @@ x2 = Function("x2")(t)
 x2_diff = diff(x2, t)
 
 
-# TODO: ast eval
 def sympy_eval(string: str) -> Any:
     """
     Eval string.

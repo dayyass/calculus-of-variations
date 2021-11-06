@@ -5,8 +5,8 @@ from sympy import diff, dsolve, integrate, solve, var
 
 # TODO: fix it
 sys.path.append("./")
-from calculus_of_variations.abstract_problem import AbstractSolver
-from calculus_of_variations.utils import (  # noqa: F401
+from src.calculus_of_variations.abstract_problem import AbstractSolver
+from src.calculus_of_variations.utils import (  # noqa: F401
     sympy_eval,
     t,
     x,
