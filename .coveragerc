@@ -1,6 +1,6 @@
 [run]
 branch = True
-source = calculus_of_variations
+source = src/calculus_of_variations
 
 [report]
 exclude_lines =

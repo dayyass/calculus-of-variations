@@ -13,4 +13,4 @@ pypi_build:
 pypi_twine:
 	python -m twine upload --repository testpypi dist/*
 pypi_clean:
-	rm -rf dist calculus_of_variations.egg-info
+	rm -rf dist src/calculus_of_variations.egg-info
